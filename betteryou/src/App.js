@@ -1,14 +1,27 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Button from 'react-bootstrap/Button';
-import './App.css';
+import React from "react";
+import { Navbar, Container, Nav } from "react-bootstrap";
 
-function App() {
+const NavBar = () => {
   return (
-    <div className="App">
-      <h1>Hello, World!</h1>
-      <Button variant="primary">Primary</Button>
-    </div>
+    <Navbar expand="md" fixed="top">
+      <Container>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="ml-auto text-left">
+            <Nav.Link>
+              <i className="fas fa-home"></i>Home
+            </Nav.Link>
+            <Nav.Link>
+              <i className="fas fa-sign-in-alt"></i>Sign in
+            </Nav.Link>
+            <Nav.Link>
+              <i className="fas fa-user-plus"></i>Sign up
+            </Nav.Link>
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
   );
-}
+};
 
-export default App;
+export default NavBar;
