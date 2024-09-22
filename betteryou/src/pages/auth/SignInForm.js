@@ -9,7 +9,7 @@ import Row from "react-bootstrap/Row";
 import Image from "react-bootstrap/Image";
 import Container from "react-bootstrap/Container";
 
-import { Link, useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import styles from "../../styles/SignInUpForm.module.css";
 import btnStyles from "../../styles/Button.module.css";
@@ -22,12 +22,12 @@ function SignInForm() {
   });
   const { username, password } = signInData;
 
-  const history = useHistory();
+  const navigate = useNavigate();
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
       await axios.post("/dj-rest-auth/login/", signInData);
-      history.push("/");
+      navigate("/");
     } catch (err) {
     }
   };
