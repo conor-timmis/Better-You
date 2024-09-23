@@ -44,7 +44,7 @@ function SignInForm() {
         <Container className={`${appStyles.Content} p-4`}>
           <h1 className={styles.Header}>Sign In</h1>
           <Form onSubmit={handleSubmit}>
-            <Form.Group controlId="username">
+            <Form.Group controlId="username" className="mb-3">
               <Form.Label className="d-none">Username</Form.Label>
               <Form.Control
                 type="text"
@@ -61,7 +61,7 @@ function SignInForm() {
               </Alert>
             ))}
 
-            <Form.Group controlId="password">
+            <Form.Group controlId="password" className="mb-3">
               <Form.Label className="d-none">Password</Form.Label>
               <Form.Control
                 type="password"
@@ -101,8 +101,8 @@ function SignInForm() {
         className={`my-auto d-none d-md-block p-2 ${styles.SignInCol}`}
       >
         <Image
-          className={`${appStyles.FillerImage}`}
-          src={"https://codeinstitute.s3.amazonaws.com/AdvancedReact/hero.jpg"}
+          className={`${appStyles.FillerImage} ${appStyles.ResizedImage}`}
+          src={"https://plus.unsplash.com/premium_photo-1672115680958-54438df0ab82?q=80&w=1768&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}
         />
       </Col>
     </Row>
