@@ -52,7 +52,7 @@ const SignUpForm = () => {
           <h1 className={styles.Header}>Sign up</h1>
 
           <Form onSubmit={handleSubmit}>
-            <Form.Group controlId="username">
+            <Form.Group controlId="username" className="mb-3">
               <Form.Label className="d-none">Username</Form.Label>
               <Form.Control
                 className={styles.Input}
@@ -69,7 +69,7 @@ const SignUpForm = () => {
               </Alert>
             ))}
 
-            <Form.Group controlId="password1">
+            <Form.Group controlId="password1" className="mb-3">
               <Form.Label className="d-none">Password</Form.Label>
               <Form.Control
                 className={styles.Input}
@@ -86,7 +86,7 @@ const SignUpForm = () => {
               </Alert>
             ))}
 
-            <Form.Group controlId="password2">
+            <Form.Group controlId="password2" className="mb-3">
               <Form.Label className="d-none">Confirm password</Form.Label>
               <Form.Control
                 className={styles.Input}
@@ -128,8 +128,8 @@ const SignUpForm = () => {
         className={`my-auto d-none d-md-block p-2 ${styles.SignUpCol}`}
       >
         <Image
-          className={`${appStyles.FillerImage}`}
-          src={"https://codeinstitute.s3.amazonaws.com/AdvancedReact/hero2.jpg"}
+          className={`${appStyles.FillerImage} ${appStyles.ResizedImage}`}
+          src={"https://images.unsplash.com/photo-1600298882283-40b4dcb8b211?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}
         />
       </Col>
     </Row>
