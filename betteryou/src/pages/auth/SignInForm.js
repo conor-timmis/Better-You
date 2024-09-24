@@ -21,21 +21,19 @@ function SignInForm() {
   const navigate = useNavigate();
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+  
     try {
       const { data } = await axios.post("/dj-rest-auth/login/", signInData);
-      setCurrentUser(data.user);
-      navigate("/");
+      if (data && data.user) {
+        setCurrentUser(data.user);
+        history.push("/");
+      } else {
+        setCurrentUser({});
+        setErrors({ non_field_errors: ["Login failed. Please try again."] });
+      }
     } catch (err) {
       setErrors(err.response?.data);
     }
-  };
-
-  const handleChange = (event) => {
-    setSignInData({
-      ...signInData,
-      [event.target.name]: event.target.value,
-    });
   };
 
   return (
@@ -51,7 +49,7 @@ function SignInForm() {
                 placeholder="Username"
                 name="username"
                 className={styles.Input}
-                value={username}
+                value={username || ""}
                 onChange={handleChange}
               />
             </Form.Group>
@@ -68,7 +66,7 @@ function SignInForm() {
                 placeholder="Password"
                 name="password"
                 className={styles.Input}
-                value={password}
+                value={password || ""}
                 onChange={handleChange}
               />
             </Form.Group>
