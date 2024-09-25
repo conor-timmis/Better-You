@@ -4,7 +4,7 @@ import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import Alert from "react-bootstrap/Alert";
 import Image from "react-bootstrap/Image";
 import Asset from "../../components/Asset";
-import Upload from "../../assets/upload.png";
+import Upload from "../../assets/upload-img.png";
 import styles from "../../styles/PostCreateEditForm.module.css";
 import appStyles from "../../App.module.css";
 import btnStyles from "../../styles/Button.module.css";
