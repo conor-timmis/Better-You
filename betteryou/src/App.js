@@ -13,11 +13,11 @@ function App() {
       <NavBar />
       <Container className={styles.Main}>
         <Routes>
-          <Route path="/" element={<h1>Home page</h1>} />
-          <Route path="/signin" element={<SignInForm />} />
-          <Route path="/signup" element={<SignUpForm />} />
-          <Route path="/posts/create" element={<PostCreateForm />} />
-          <Route path="*" element={<p>Page not found!</p>} />
+          <Route exact="true" path="/" element={<h1>Home page</h1>} />
+          <Route exact="true" path="/signin" element={<SignInForm />} />
+          <Route exact="true" path="/signup" element={<SignUpForm />} />
+          <Route exact="true" path="/posts/create" element={<PostCreateForm />} />
+          <Route exact="true" path="*" element={<p>Page not found!</p>} />
         </Routes>
       </Container>
     </div>
