@@ -21,19 +21,21 @@ function SignInForm() {
   const navigate = useNavigate();
   const handleSubmit = async (event) => {
     event.preventDefault();
-  
+
     try {
       const { data } = await axios.post("/dj-rest-auth/login/", signInData);
-      if (data && data.user) {
-        setCurrentUser(data.user);
-        history.push("/");
-      } else {
-        setCurrentUser({});
-        setErrors({ non_field_errors: ["Login failed. Please try again."] });
-      }
+      setCurrentUser(data.user);
+      navigate();
     } catch (err) {
       setErrors(err.response?.data);
     }
+  };
+
+  const handleChange = (event) => {
+    setSignInData({
+      ...signInData,
+      [event.target.name]: event.target.value,
+    });
   };
 
   return (
