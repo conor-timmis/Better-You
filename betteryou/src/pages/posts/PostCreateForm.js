@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import Alert from "react-bootstrap/Alert";
 import Image from "react-bootstrap/Image";
@@ -19,7 +19,7 @@ function PostCreateForm() {
   });
   const { title, content, image } = postData;
   const imageInput = useRef(null);
-  const navigate = useNavigate();
+  const history = useHistory();
 
   const handleChange = (event) => {
     setPostData({
@@ -47,7 +47,7 @@ function PostCreateForm() {
 
     try {
       const { data } = await axiosReq.post("/posts/", formData);
-      navigate(`/posts/${data.id}`);
+      history(`/posts/${data.id}`);
     } catch (err) {
       console.log(err);
       if (err.response?.status !== 401) {
@@ -91,7 +91,7 @@ function PostCreateForm() {
 
       <Button
         className={`${btnStyles.Button} ${btnStyles.Blue}`}
-        onClick={() => navigate(-1)}
+        onClick={() => history(-1)}
       >
         cancel
       </Button>
