@@ -6,9 +6,11 @@ import styles from "../../styles/SignInUpForm.module.css";
 import btnStyles from "../../styles/Button.module.css";
 import appStyles from "../../App.module.css";
 import { useSetCurrentUser } from "../../contexts/CurrentUserContext";
+import { useRedirect } from "../../hooks/useRedirect";
 
 function SignInForm() {
   const setCurrentUser = useSetCurrentUser();
+  useRedirect("loggedIn");
 
   const [signInData, setSignInData] = useState({
     username: "",
@@ -25,7 +27,7 @@ function SignInForm() {
     try {
       const { data } = await axios.post("/dj-rest-auth/login/", signInData);
       setCurrentUser(data.user);
-      history.push("/");
+      history.goBack();
     } catch (err) {
       setErrors(err.response?.data);
     }
@@ -44,14 +46,14 @@ function SignInForm() {
         <Container className={`${appStyles.Content} p-4`}>
           <h1 className={styles.Header}>Sign In</h1>
           <Form onSubmit={handleSubmit}>
-            <Form.Group controlId="username" className="mb-3">
+          <Form.Group controlId="username" className="mb-3">
               <Form.Label className="d-none">Username</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="Username"
                 name="username"
                 className={styles.Input}
-                value={username || ""}
+                value={username}
                 onChange={handleChange}
               />
             </Form.Group>
@@ -68,7 +70,7 @@ function SignInForm() {
                 placeholder="Password"
                 name="password"
                 className={styles.Input}
-                value={password || ""}
+                value={password}
                 onChange={handleChange}
               />
             </Form.Group>
