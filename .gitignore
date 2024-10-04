@@ -5,6 +5,7 @@ env.py
 __pycache__/
 *.py[cod]
 .github/
+/node_modules/
 cloudinary_python.txt
 /node_modules/
 /.pnp
