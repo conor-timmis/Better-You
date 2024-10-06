@@ -49,5 +49,10 @@
     "engines": {
         "node": "18.x",
         "npm": "8.x"
+    },
+    "babel": {
+        "plugins": [
+            "@babel/plugin-proposal-private-property-in-object"
+        ]
     }
 }
