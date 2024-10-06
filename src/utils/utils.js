@@ -1,6 +1,5 @@
-import { jwtDecode } from 'jwt-decode';
+import jwt_decode from 'jwt-decode';
 import { axiosReq } from "../api/axiosDefaults";
-
 
 export const fetchMoreData = async (resource, setResource) => {
   try {
@@ -54,7 +53,7 @@ export const unfollowHelper = (profile, clickedProfile) => {
 };
 
 export const setTokenTimestamp = (data) => {
-  const refreshTokenTimestamp = jwtDecode(data?.refresh_token).exp;
+  const refreshTokenTimestamp = jwt_decode(data?.refresh_token).exp;
   localStorage.setItem("refreshTokenTimestamp", refreshTokenTimestamp);
 };
 export const shouldRefreshToken = () => {
