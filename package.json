@@ -51,6 +51,8 @@
         "npm": "8.x"
     },
     "babel": {
-        "plugins": ["@babel/plugin-transform-private-property-in-object"]
-      }      
+        "plugins": [
+            "@babel/plugin-transform-private-property-in-object"
+        ]
+    }
 }
