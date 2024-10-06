@@ -54,7 +54,7 @@
         "node": "18.x",
         "npm": "8.x"
     },
-        "devDependencies": {
-          "typescript": "^4.9.5"
-        }
+    "devDependencies": {
+        "typescript": "^4.9.5"
+    }
 }
