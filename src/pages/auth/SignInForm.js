@@ -31,7 +31,7 @@ function SignInForm() {
       setTokenTimestamp(data);
       history.goBack();
     } catch (err) {
-      setErrors(err.response?.data);
+      setErrors(err.response?.data || {});
     }
   };
 
@@ -48,7 +48,7 @@ function SignInForm() {
         <Container className={`${appStyles.Content} p-4`}>
           <h1 className={styles.Header}>Sign In</h1>
           <Form onSubmit={handleSubmit}>
-          <Form.Group controlId="username" className="mb-3">
+            <Form.Group controlId="username" className="mb-3">
               <Form.Label className="d-none">Username</Form.Label>
               <Form.Control
                 type="text"
@@ -63,7 +63,7 @@ function SignInForm() {
               <Alert key={idx} variant="warning">
                 {message}
               </Alert>
-            ))}
+            )) || null}
 
             <Form.Group controlId="password" className="mb-3">
               <Form.Label className="d-none">Password</Form.Label>
@@ -80,7 +80,7 @@ function SignInForm() {
               <Alert key={idx} variant="warning">
                 {message}
               </Alert>
-            ))}
+            )) || null}
             <Button
               className={`${btnStyles.Button} ${btnStyles.Wide} ${btnStyles.Bright}`}
               type="submit"
@@ -91,7 +91,7 @@ function SignInForm() {
               <Alert key={idx} variant="warning" className="mt-3">
                 {message}
               </Alert>
-            ))}
+            )) || null}
           </Form>
         </Container>
         <Container className={`mt-3 ${appStyles.Content}`}>
