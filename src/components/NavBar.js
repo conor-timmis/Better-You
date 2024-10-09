@@ -4,7 +4,7 @@ import logo from "../assets/logo.png";
 import styles from "../styles/NavBar.module.css";
 import { NavLink } from "react-router-dom";
 import { useCurrentUser, useSetCurrentUser } from "../contexts/CurrentUserContext";
-import axios from "axios";
+import { axiosReq } from "../api/axiosDefaults";
 import Avatar from "./Avatar";
 import useClickOutsideToggle from "../hooks/useClickOutsideToggle";
 import { removeTokenTimestamp } from "../utils/utils";
@@ -17,9 +17,11 @@ const NavBar = () => {
 
   const handleSignOut = async () => {
     try {
-      await axios.post("dj-rest-auth/logout/");
+      await axiosReq.post("/dj-rest-auth/logout/");
       setCurrentUser(null);
       removeTokenTimestamp();
+      localStorage.removeItem("accessToken");
+      window.location.href = "/signin";
     } catch (err) {
       console.log(err);
     }
@@ -51,9 +53,9 @@ const NavBar = () => {
       >
         <i className="fas fa-heart"></i>Liked
       </NavLink>
-      <NavLink className={styles.NavLink} to="/" onClick={handleSignOut}>
+      <span className={styles.NavLink} onClick={handleSignOut} role="button">
         <i className="fas fa-sign-out-alt"></i>Sign out
-      </NavLink>
+      </span>
       <NavLink
         className={styles.NavLink}
         to={`/profiles/${currentUser?.profile_id}`}
@@ -91,7 +93,11 @@ const NavBar = () => {
           </Navbar.Brand>
         </NavLink>
         {currentUser && addPostIcon}
-        <Navbar.Toggle ref={ref} onClick={() => setExpanded(!expanded)} aria-controls="basic-navbar-nav" />
+        <Navbar.Toggle
+          ref={ref}
+          onClick={() => setExpanded(!expanded)}
+          aria-controls="basic-navbar-nav"
+        />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ml-auto text-left">
             <NavLink
