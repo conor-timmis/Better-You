@@ -1,13 +1,12 @@
-import React, { useState } from "react";
-import axios from "axios";
-import { Form, Button, Col, Row, Image, Container, Alert } from "react-bootstrap";
-import { useHistory, Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { axiosReq } from "../../api/axiosDefaults";
+import { Image, Form, Button, Col, Row, Container, Alert } from "react-bootstrap";
+import { Link, useHistory } from "react-router-dom";
 import styles from "../../styles/SignInUpForm.module.css";
 import btnStyles from "../../styles/Button.module.css";
 import appStyles from "../../App.module.css";
 import { useSetCurrentUser } from "../../contexts/CurrentUserContext";
 import { useRedirect } from "../../hooks/useRedirect";
-import { setTokenTimestamp } from "../../utils/utils";
 
 function SignInForm() {
   const setCurrentUser = useSetCurrentUser();
@@ -22,24 +21,44 @@ function SignInForm() {
   const [errors, setErrors] = useState({});
 
   const history = useHistory();
-  const handleSubmit = async (event) => {
-    event.preventDefault();
 
-    try {
-      const { data } = await axios.post("/dj-rest-auth/login/", signInData);
-      setCurrentUser(data.user);
-      setTokenTimestamp(data);
-      history.goBack();
-    } catch (err) {
-      setErrors(err.response?.data || {});
-    }
-  };
+  useEffect(() => {
+    const getCSRFToken = async () => {
+      try {
+        await axiosReq.get("/");
+      } catch (err) {
+        console.error("Error fetching CSRF token:", err);
+      }
+    };
+
+    getCSRFToken();
+  }, []);
 
   const handleChange = (event) => {
     setSignInData({
       ...signInData,
       [event.target.name]: event.target.value,
     });
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    try {
+      const { data } = await axiosReq.post("/dj-rest-auth/login/", signInData);
+      localStorage.setItem("accessToken", data.access_token);
+      setCurrentUser(data.user);
+      history.goBack();
+    } catch (err) {
+      if (err.response?.status === 400) {
+        setErrors(err.response.data || {});
+      } else if (err.response?.status === 401) {
+        setErrors({ non_field_errors: ["Invalid username or password."] });
+      } else {
+        console.error(err);
+        setErrors({ non_field_errors: ["An error occurred. Please try again."] });
+      }
+    }
   };
 
   return (
@@ -63,7 +82,7 @@ function SignInForm() {
               <Alert key={idx} variant="warning">
                 {message}
               </Alert>
-            )) || null}
+            ))}
 
             <Form.Group controlId="password" className="mb-3">
               <Form.Label className="d-none">Password</Form.Label>
@@ -80,7 +99,8 @@ function SignInForm() {
               <Alert key={idx} variant="warning">
                 {message}
               </Alert>
-            )) || null}
+            ))}
+
             <Button
               className={`${btnStyles.Button} ${btnStyles.Wide} ${btnStyles.Bright}`}
               type="submit"
@@ -91,7 +111,7 @@ function SignInForm() {
               <Alert key={idx} variant="warning" className="mt-3">
                 {message}
               </Alert>
-            )) || null}
+            ))}
           </Form>
         </Container>
         <Container className={`mt-3 ${appStyles.Content}`}>
@@ -106,7 +126,10 @@ function SignInForm() {
       >
         <Image
           className={`${appStyles.FillerImage} ${appStyles.ResizedImage}`}
-          src={"https://plus.unsplash.com/premium_photo-1672115680958-54438df0ab82?q=80&w=1768&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}
+          src={
+            "https://plus.unsplash.com/premium_photo-1672115680958-54438df0ab82?q=80&w=1768&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdl"
+          }
+          alt="Sign In"
         />
       </Col>
     </Row>
