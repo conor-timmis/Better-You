@@ -1,22 +1,30 @@
 import React, { useEffect, useState } from "react";
-import { Col, Row, Container, Button, Image } from "react-bootstrap";
-import InfiniteScroll from "react-infinite-scroll-component";
+
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
+import Container from "react-bootstrap/Container";
 
 import Asset from "../../components/Asset";
-import PopularProfiles from "./PopularProfiles";
-import Post from "../posts/Post";
-import NoResults from "../../assets/no-results.png";
-import { ProfileEditDropdown } from "../../components/MoreDropdown";
 
 import styles from "../../styles/ProfilePage.module.css";
 import appStyles from "../../App.module.css";
 import btnStyles from "../../styles/Button.module.css";
 
+import PopularProfiles from "./PopularProfiles";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
-import { useParams } from "react-router-dom/cjs/react-router-dom.min";
+import { useParams } from "react-router-dom";
 import { axiosReq } from "../../api/axiosDefaults";
-import { useProfileData, useSetProfileData } from "../../contexts/ProfileDataContext";
+import {
+  useProfileData,
+  useSetProfileData,
+} from "../../contexts/ProfileDataContext";
+import Button from "react-bootstrap/Button";
+import Image from "react-bootstrap/Image";
+import InfiniteScroll from "react-infinite-scroll-component";
+import Post from "../posts/Post";
 import { fetchMoreData } from "../../utils/utils";
+import NoResults from "../../assets/no-results.png";
+import { ProfileEditDropdown } from "../../components/MoreDropdown";
 
 function ProfilePage() {
   const [hasLoaded, setHasLoaded] = useState(false);
@@ -46,7 +54,7 @@ function ProfilePage() {
         setProfilePosts(profilePosts);
         setHasLoaded(true);
       } catch (err) {
-        console.log(err);
+        // console.log(err);
       }
     };
     fetchData();
@@ -54,8 +62,8 @@ function ProfilePage() {
 
   const mainProfile = (
     <>
-     {profile?.is_owner && <ProfileEditDropdown id={profile?.id} />}
-      <Row nogutters="true" className="px-3 text-center">
+      {profile?.is_owner && <ProfileEditDropdown id={profile?.id} />}
+      <Row noGutters className="px-3 text-center">
         <Col lg={3} className="text-lg-left">
           <Image
             className={styles.ProfileImage}

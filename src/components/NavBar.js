@@ -1,11 +1,16 @@
 import React from "react";
-import { Navbar, Container, Nav } from "react-bootstrap";
+import Navbar from "react-bootstrap/Navbar";
+import Container from "react-bootstrap/Container";
+import Nav from "react-bootstrap/Nav";
 import logo from "../assets/logo.png";
 import styles from "../styles/NavBar.module.css";
 import { NavLink } from "react-router-dom";
-import { useCurrentUser, useSetCurrentUser } from "../contexts/CurrentUserContext";
-import { axiosReq } from "../api/axiosDefaults";
+import {
+  useCurrentUser,
+  useSetCurrentUser,
+} from "../contexts/CurrentUserContext";
 import Avatar from "./Avatar";
+import axios from "axios";
 import useClickOutsideToggle from "../hooks/useClickOutsideToggle";
 import { removeTokenTimestamp } from "../utils/utils";
 
@@ -17,13 +22,11 @@ const NavBar = () => {
 
   const handleSignOut = async () => {
     try {
-      await axiosReq.post("/dj-rest-auth/logout/");
+      await axios.post("dj-rest-auth/logout/");
       setCurrentUser(null);
       removeTokenTimestamp();
-      localStorage.removeItem("accessToken");
-      window.location.href = "/signin";
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
   };
 
@@ -36,7 +39,6 @@ const NavBar = () => {
       <i className="far fa-plus-square"></i>Add post
     </NavLink>
   );
-
   const loggedInIcons = (
     <>
       <NavLink
@@ -53,9 +55,9 @@ const NavBar = () => {
       >
         <i className="fas fa-heart"></i>Liked
       </NavLink>
-      <span className={styles.NavLink} onClick={handleSignOut} role="button">
+      <NavLink className={styles.NavLink} to="/" onClick={handleSignOut}>
         <i className="fas fa-sign-out-alt"></i>Sign out
-      </span>
+      </NavLink>
       <NavLink
         className={styles.NavLink}
         to={`/profiles/${currentUser?.profile_id}`}
@@ -64,7 +66,6 @@ const NavBar = () => {
       </NavLink>
     </>
   );
-
   const loggedOutIcons = (
     <>
       <NavLink
@@ -85,7 +86,12 @@ const NavBar = () => {
   );
 
   return (
-    <Navbar className={styles.NavBar} expand="md" fixed="top">
+    <Navbar
+      expanded={expanded}
+      className={styles.NavBar}
+      expand="md"
+      fixed="top"
+    >
       <Container>
         <NavLink to="/">
           <Navbar.Brand>

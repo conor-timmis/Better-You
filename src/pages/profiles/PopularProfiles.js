@@ -1,5 +1,5 @@
 import React from "react";
-import { Container } from "react-bootstrap";
+import Container from "react-bootstrap/Container";
 import appStyles from "../../App.module.css";
 import Asset from "../../components/Asset";
 import { useProfileData } from "../../contexts/ProfileDataContext";
@@ -14,7 +14,7 @@ const PopularProfiles = ({ mobile }) => {
         mobile && "d-lg-none text-center mb-3"
       }`}
     >
-      {popularProfiles.results ? (
+      {popularProfiles.results.length ? (
         <>
           <p>Most followed profiles.</p>
           {mobile ? (

@@ -1,20 +1,36 @@
 import React, { useRef, useState } from "react";
-import { useHistory } from "react-router-dom";
+
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Container from "react-bootstrap/Container";
+import Alert from "react-bootstrap/Alert";
+import Image from "react-bootstrap/Image";
+
 import Asset from "../../components/Asset";
+
 import Upload from "../../assets/upload-img.png";
+
 import styles from "../../styles/PostCreateEditForm.module.css";
 import appStyles from "../../App.module.css";
 import btnStyles from "../../styles/Button.module.css";
+
+import { useHistory } from "react-router-dom";
 import { axiosReq } from "../../api/axiosDefaults";
+import { useRedirect } from "../../hooks/useRedirect";
 
 function PostCreateForm() {
+  useRedirect("loggedOut");
   const [errors, setErrors] = useState({});
+
   const [postData, setPostData] = useState({
     title: "",
     content: "",
     image: "",
   });
   const { title, content, image } = postData;
+
   const imageInput = useRef(null);
   const history = useHistory();
 
@@ -38,97 +54,91 @@ function PostCreateForm() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData();
+
     formData.append("title", title);
     formData.append("content", content);
-    if (imageInput.current.files[0]) {
-      formData.append("image", imageInput.current.files[0]);
-    }
-  
+    formData.append("image", imageInput.current.files[0]);
+
     try {
       const { data } = await axiosReq.post("/posts/", formData);
       history.push(`/posts/${data.id}`);
     } catch (err) {
+      // console.log(err);
       if (err.response?.status !== 401) {
         setErrors(err.response?.data);
       }
     }
   };
-  
 
   const textFields = (
     <div className="text-center">
-      <div className="form-group">
-        <label htmlFor="title">Title</label>
-        <input
+      <Form.Group>
+        <Form.Label>Title</Form.Label>
+        <Form.Control
           type="text"
-          className="form-control"
-          id="title"
           name="title"
           value={title}
           onChange={handleChange}
         />
-      </div>
+      </Form.Group>
       {errors?.title?.map((message, idx) => (
-        <div className="alert alert-warning" key={idx}>
+        <Alert variant="warning" key={idx}>
           {message}
-        </div>
+        </Alert>
       ))}
-      <div className="form-group">
-        <label htmlFor="content">Content</label>
-        <textarea
-          className="form-control"
-          id="content"
+
+      <Form.Group>
+        <Form.Label>Content</Form.Label>
+        <Form.Control
+          as="textarea"
           rows={6}
           name="content"
           value={content}
           onChange={handleChange}
         />
-      </div>
+      </Form.Group>
       {errors?.content?.map((message, idx) => (
-        <div className="alert alert-warning" key={idx}>
+        <Alert variant="warning" key={idx}>
           {message}
-        </div>
+        </Alert>
       ))}
-      <button
-        type="button"
-        className={`btn ${btnStyles.Button} ${btnStyles.Blue}`}
+
+      <Button
+        className={`${btnStyles.Button} ${btnStyles.Blue}`}
         onClick={() => history.goBack()}
       >
         cancel
-      </button>
-      <button
-        type="submit"
-        className={`btn ${btnStyles.Button} ${btnStyles.Blue}`}
-      >
+      </Button>
+      <Button className={`${btnStyles.Button} ${btnStyles.Blue}`} type="submit">
         create
-      </button>
+      </Button>
     </div>
   );
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div className="row">
-        <div className="col-md-7 col-lg-8 py-2 p-0 p-md-2">
-          <div
+    <Form onSubmit={handleSubmit}>
+      <Row>
+        <Col className="py-2 p-0 p-md-2" md={7} lg={8}>
+          <Container
             className={`${appStyles.Content} ${styles.Container} d-flex flex-column justify-content-center`}
           >
-            <div className="form-group text-center">
+            <Form.Group className="text-center">
               {image ? (
                 <>
                   <figure>
-                    <img className={appStyles.Image} src={image} alt="Post" />
+                    <Image className={appStyles.Image} src={image} rounded />
                   </figure>
                   <div>
-                    <label
-                      className={`btn ${btnStyles.Button} ${btnStyles.Blue} btn`}
+                    <Form.Label
+                      className={`${btnStyles.Button} ${btnStyles.Blue} btn`}
                       htmlFor="image-upload"
                     >
                       Change the image
-                    </label>
+                    </Form.Label>
                   </div>
                 </>
               ) : (
-                <label
+                <Form.Label
                   className="d-flex justify-content-center"
                   htmlFor="image-upload"
                 >
@@ -136,30 +146,30 @@ function PostCreateForm() {
                     src={Upload}
                     message="Click or tap to upload an image"
                   />
-                </label>
+                </Form.Label>
               )}
-              <input
-                type="file"
-                className="form-control-file"
+
+              <Form.File
                 id="image-upload"
                 accept="image/*"
                 onChange={handleChangeImage}
                 ref={imageInput}
               />
-            </div>
+            </Form.Group>
             {errors?.image?.map((message, idx) => (
-              <div className="alert alert-warning" key={idx}>
+              <Alert variant="warning" key={idx}>
                 {message}
-              </div>
+              </Alert>
             ))}
+
             <div className="d-md-none">{textFields}</div>
-          </div>
-        </div>
-        <div className="col-md-5 col-lg-4 d-none d-md-block p-0 p-md-2">
-          <div className={appStyles.Content}>{textFields}</div>
-        </div>
-      </div>
-    </form>
+          </Container>
+        </Col>
+        <Col md={5} lg={4} className="d-none d-md-block p-0 p-md-2">
+          <Container className={appStyles.Content}>{textFields}</Container>
+        </Col>
+      </Row>
+    </Form>
   );
 }
 

@@ -1,10 +1,10 @@
 import axios from "axios";
 import { useEffect } from "react";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-
+import { useHistory } from "react-router-dom";
 
 export const useRedirect = (userAuthStatus) => {
   const history = useHistory();
+
   useEffect(() => {
     const handleMount = async () => {
       try {
@@ -20,6 +20,7 @@ export const useRedirect = (userAuthStatus) => {
         }
       }
     };
+
     handleMount();
   }, [history, userAuthStatus]);
 };
