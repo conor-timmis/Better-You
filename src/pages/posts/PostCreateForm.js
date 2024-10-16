@@ -1,18 +1,13 @@
 import React, { useRef, useState } from "react";
 import { useHistory } from "react-router-dom";
-import { Button, Col, Container, Form, Row } from "react-bootstrap";
-import Alert from "react-bootstrap/Alert";
-import Image from "react-bootstrap/Image";
 import Asset from "../../components/Asset";
 import Upload from "../../assets/upload-img.png";
 import styles from "../../styles/PostCreateEditForm.module.css";
 import appStyles from "../../App.module.css";
 import btnStyles from "../../styles/Button.module.css";
 import { axiosReq } from "../../api/axiosDefaults";
-import { useRedirect } from "../../hooks/useRedirect";
 
 function PostCreateForm() {
-  useRedirect("loggedOut");
   const [errors, setErrors] = useState({});
   const [postData, setPostData] = useState({
     title: "",
@@ -45,11 +40,13 @@ function PostCreateForm() {
     const formData = new FormData();
     formData.append("title", title);
     formData.append("content", content);
-    formData.append("image", imageInput.current.files[0]);
-
+    if (imageInput.current.files[0]) {
+      formData.append("image", imageInput.current.files[0]);
+    }
+  
     try {
       const { data } = await axiosReq.post("/posts/", formData);
-      history(`/posts/${data.id}`);
+      history.push(`/posts/${data.id}`);
     } catch (err) {
       console.log(err);
       if (err.response?.status !== 401) {
@@ -57,76 +54,82 @@ function PostCreateForm() {
       }
     }
   };
+  
 
   const textFields = (
     <div className="text-center">
-      <Form.Group>
-        <Form.Label>Title</Form.Label>
-        <Form.Control
+      <div className="form-group">
+        <label htmlFor="title">Title</label>
+        <input
           type="text"
+          className="form-control"
+          id="title"
           name="title"
           value={title}
           onChange={handleChange}
         />
-      </Form.Group>
+      </div>
       {errors?.title?.map((message, idx) => (
-        <Alert variant="warning" key={idx}>
+        <div className="alert alert-warning" key={idx}>
           {message}
-        </Alert>
+        </div>
       ))}
-
-      <Form.Group>
-        <Form.Label>Content</Form.Label>
-        <Form.Control
-          as="textarea"
+      <div className="form-group">
+        <label htmlFor="content">Content</label>
+        <textarea
+          className="form-control"
+          id="content"
           rows={6}
           name="content"
           value={content}
           onChange={handleChange}
         />
-      </Form.Group>
+      </div>
       {errors?.content?.map((message, idx) => (
-        <Alert variant="warning" key={idx}>
+        <div className="alert alert-warning" key={idx}>
           {message}
-        </Alert>
+        </div>
       ))}
-
-      <Button
-        className={`${btnStyles.Button} ${btnStyles.Blue}`}
-        onClick={() => history(-1)}
+      <button
+        type="button"
+        className={`btn ${btnStyles.Button} ${btnStyles.Blue}`}
+        onClick={() => history.goBack()}
       >
         cancel
-      </Button>
-      <Button className={`${btnStyles.Button} ${btnStyles.Blue}`} type="submit">
+      </button>
+      <button
+        type="submit"
+        className={`btn ${btnStyles.Button} ${btnStyles.Blue}`}
+      >
         create
-      </Button>
+      </button>
     </div>
   );
 
   return (
-    <Form onSubmit={handleSubmit}>
-      <Row>
-        <Col className="py-2 p-0 p-md-2" md={7} lg={8}>
-          <Container
+    <form onSubmit={handleSubmit}>
+      <div className="row">
+        <div className="col-md-7 col-lg-8 py-2 p-0 p-md-2">
+          <div
             className={`${appStyles.Content} ${styles.Container} d-flex flex-column justify-content-center`}
           >
-            <Form.Group className="text-center">
+            <div className="form-group text-center">
               {image ? (
                 <>
                   <figure>
-                    <Image className={appStyles.Image} src={image} rounded />
+                    <img className={appStyles.Image} src={image} alt="Post" />
                   </figure>
                   <div>
-                    <Form.Label
-                      className={`${btnStyles.Button} ${btnStyles.Blue} btn`}
+                    <label
+                      className={`btn ${btnStyles.Button} ${btnStyles.Blue} btn`}
                       htmlFor="image-upload"
                     >
                       Change the image
-                    </Form.Label>
+                    </label>
                   </div>
                 </>
               ) : (
-                <Form.Label
+                <label
                   className="d-flex justify-content-center"
                   htmlFor="image-upload"
                 >
@@ -134,30 +137,30 @@ function PostCreateForm() {
                     src={Upload}
                     message="Click or tap to upload an image"
                   />
-                </Form.Label>
+                </label>
               )}
-
-              <Form.File
+              <input
+                type="file"
+                className="form-control-file"
                 id="image-upload"
                 accept="image/*"
                 onChange={handleChangeImage}
                 ref={imageInput}
               />
-            </Form.Group>
+            </div>
             {errors?.image?.map((message, idx) => (
-              <Alert variant="warning" key={idx}>
+              <div className="alert alert-warning" key={idx}>
                 {message}
-              </Alert>
+              </div>
             ))}
-
             <div className="d-md-none">{textFields}</div>
-          </Container>
-        </Col>
-        <Col md={5} lg={4} className="d-none d-md-block p-0 p-md-2">
-          <Container className={appStyles.Content}>{textFields}</Container>
-        </Col>
-      </Row>
-    </Form>
+          </div>
+        </div>
+        <div className="col-md-5 col-lg-4 d-none d-md-block p-0 p-md-2">
+          <div className={appStyles.Content}>{textFields}</div>
+        </div>
+      </div>
+    </form>
   );
 }
 
