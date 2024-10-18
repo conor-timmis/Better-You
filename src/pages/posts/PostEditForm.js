@@ -29,6 +29,13 @@ function PostEditForm() {
   const history = useHistory();
   const { id } = useParams();
 
+  /*
+    Requests API data about post
+    Doesn't allow other user to edit
+    post that is not owned by them
+    If is not owner and edit is 
+    attempted, redirect to home
+  */
   useEffect(() => {
     const handleMount = async () => {
       try {
@@ -37,13 +44,15 @@ function PostEditForm() {
 
         is_owner ? setPostData({ title, content, image }) : history.push("/");
       } catch (err) {
-        // console.log(err);
       }
     };
 
     handleMount();
   }, [history, id]);
 
+  /* 
+    Handles changes to the post form fields
+  */
   const handleChange = (event) => {
     setPostData({
       ...postData,
@@ -51,6 +60,9 @@ function PostEditForm() {
     });
   };
 
+  /* 
+    Handles change to the image field (image file)
+  */
   const handleChangeImage = (event) => {
     if (event.target.files.length) {
       URL.revokeObjectURL(image);
@@ -61,6 +73,12 @@ function PostEditForm() {
     }
   };
 
+  /* 
+    Handles submit of post data
+    if unauthenticated posting is
+    not allowed and error is given
+    redirects to new post with new id
+  */
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData();
@@ -76,7 +94,6 @@ function PostEditForm() {
       await axiosReq.put(`/posts/${id}/`, formData);
       history.push(`/posts/${id}`);
     } catch (err) {
-      // console.log(err);
       if (err.response?.status !== 401) {
         setErrors(err.response?.data);
       }

@@ -26,6 +26,10 @@ function PostPage() {
   const profile_image = currentUser?.profile_image;
   const [comments, setComments] = useState({ results: [] });
 
+  /*
+    Handles request for post and all post comment data
+    If different post id is viewed, get data for that id
+  */
   useEffect(() => {
     const handleMount = async () => {
       try {
@@ -36,7 +40,6 @@ function PostPage() {
         setPost({ results: [post] });
         setComments(comments);
       } catch (err) {
-        // console.log(err);
       }
     };
 

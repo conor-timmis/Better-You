@@ -29,6 +29,10 @@ const SignUpForm = () => {
 
   const history = useHistory();
 
+  /* 
+    Handles changes and allows
+    for input field data input
+  */
   const handleChange = (event) => {
     setSignUpData({
       ...signUpData,
@@ -36,6 +40,10 @@ const SignUpForm = () => {
     });
   };
 
+  /* 
+    Handles form data submit,
+    pushes to login
+  */
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {

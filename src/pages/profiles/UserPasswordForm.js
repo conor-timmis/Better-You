@@ -27,6 +27,9 @@ const UserPasswordForm = () => {
 
   const [errors, setErrors] = useState({});
 
+  /*
+    Handles the editing of password, pushes to home
+  */
   const handleChange = (event) => {
     setUserData({
       ...userData,
@@ -41,13 +44,18 @@ const UserPasswordForm = () => {
     }
   }, [currentUser, history, id]);
 
+  /* 
+    Handles the submit of new password data
+    Uses history.goBack() to take user back to
+    last page they were on, but displays password
+    edited message
+  */
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
       await axiosRes.post("/dj-rest-auth/password/change/", userData);
       history.goBack();
     } catch (err) {
-      // console.log(err);
       setErrors(err.response?.data);
     }
   };

@@ -34,6 +34,10 @@ const ProfileEditForm = () => {
 
   const [errors, setErrors] = useState({});
 
+  /*
+    Allows for edit of user profile based upon
+    if profile is owned by user, requests by id
+  */
   useEffect(() => {
     const handleMount = async () => {
       if (currentUser?.profile_id?.toString() === id) {
@@ -42,7 +46,6 @@ const ProfileEditForm = () => {
           const { name, content, image } = data;
           setProfileData({ name, content, image });
         } catch (err) {
-          // console.log(err);
           history.push("/");
         }
       } else {
@@ -53,6 +56,9 @@ const ProfileEditForm = () => {
     handleMount();
   }, [currentUser, history, id]);
 
+  /* 
+    Handles changes to the profile edit form fields
+  */
   const handleChange = (event) => {
     setProfileData({
       ...profileData,
@@ -60,6 +66,10 @@ const ProfileEditForm = () => {
     });
   };
 
+  /* 
+    Handles the profile edit form submit
+    Redirects the user to the profile page
+  */
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData();
@@ -70,6 +80,10 @@ const ProfileEditForm = () => {
       formData.append("image", imageFile?.current?.files[0]);
     }
 
+    /* 
+      When profile has been edited, displays
+      edit confirmation message
+    */
     try {
       const { data } = await axiosReq.put(`/profiles/${id}/`, formData);
       setCurrentUser((currentUser) => ({
@@ -78,7 +92,6 @@ const ProfileEditForm = () => {
       }));
       history.goBack();
     } catch (err) {
-      // console.log(err);
       setErrors(err.response?.data);
     }
   };

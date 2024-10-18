@@ -26,6 +26,11 @@ import { fetchMoreData } from "../../utils/utils";
 import NoResults from "../../assets/no-results.png";
 import { ProfileEditDropdown } from "../../components/MoreDropdown";
 
+
+  /*
+    Fetches user profile and the posts they have created,
+    sets posts when they are made onto profile
+  */
 function ProfilePage() {
   const [hasLoaded, setHasLoaded] = useState(false);
   const [profilePosts, setProfilePosts] = useState({ results: [] });
@@ -54,12 +59,15 @@ function ProfilePage() {
         setProfilePosts(profilePosts);
         setHasLoaded(true);
       } catch (err) {
-        // console.log(err);
       }
     };
     fetchData();
   }, [id, setProfileData]);
 
+
+  /*
+    Shows all details related to profile
+  */
   const mainProfile = (
     <>
       {profile?.is_owner && <ProfileEditDropdown id={profile?.id} />}
@@ -112,6 +120,9 @@ function ProfilePage() {
     </>
   );
 
+  /*
+    Displays posts created by profile owner
+  */
   const mainProfilePosts = (
     <>
       <hr />

@@ -9,11 +9,19 @@ function CommentEditForm(props) {
   const { id, content, setShowEditForm, setComments } = props;
 
   const [formContent, setFormContent] = useState(content);
-
+  
+  /* 
+    Handles changes to form input field
+  */
   const handleChange = (event) => {
     setFormContent(event.target.value);
   };
 
+  /* 
+    Handles the edit comment form input submit
+    Date of updated comment is reset to the 
+    new time updated
+  */
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -34,7 +42,6 @@ function CommentEditForm(props) {
       }));
       setShowEditForm(false);
     } catch (err) {
-      console.log(err);
     }
   };
 

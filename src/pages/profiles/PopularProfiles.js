@@ -5,6 +5,10 @@ import Asset from "../../components/Asset";
 import { useProfileData } from "../../contexts/ProfileDataContext";
 import Profile from "./Profile";
 
+
+/*
+  Shows 5 of the most followed profiles
+*/
 const PopularProfiles = ({ mobile }) => {
   const { popularProfiles } = useProfileData();
 

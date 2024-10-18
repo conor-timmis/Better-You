@@ -25,6 +25,11 @@ const Comment = (props) => {
   const currentUser = useCurrentUser();
   const is_owner = currentUser?.username === owner;
 
+  /*
+    Handles delete of comment based on comment id
+    Removes comment and decreases comments_total by 
+    1
+  */
   const handleDelete = async () => {
     try {
       await axiosRes.delete(`/comments/${id}/`);

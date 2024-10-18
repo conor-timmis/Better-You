@@ -33,19 +33,29 @@ const Post = (props) => {
   const is_owner = currentUser?.username === owner;
   const history = useHistory();
 
+  /*
+    Allows for edit of post by id
+  */
   const handleEdit = () => {
     history.push(`/posts/${id}/edit`);
   };
-
+  /*
+    Handles delete of post by id,
+    pushes user to home after
+  */
   const handleDelete = async () => {
     try {
       await axiosRes.delete(`/posts/${id}/`);
       history.goBack();
     } catch (err) {
-      // console.log(err);
     }
   };
-
+  /*
+    Handles like on a post by a user,
+    sends API request for a post by id
+    and by what profile_id likes it,
+    increses like total by one
+  */
   const handleLike = async () => {
     try {
       const { data } = await axiosRes.post("/likes/", { post: id });
@@ -58,10 +68,13 @@ const Post = (props) => {
         }),
       }));
     } catch (err) {
-      // console.log(err);
     }
   };
-
+  /*
+    Handles unlike on a post by a user,
+    sends API request for a post by id
+    Decreases likes total by one
+  */
   const handleUnlike = async () => {
     try {
       await axiosRes.delete(`/likes/${like_id}/`);
@@ -74,7 +87,6 @@ const Post = (props) => {
         }),
       }));
     } catch (err) {
-      // console.log(err);
     }
   };
 
@@ -105,6 +117,7 @@ const Post = (props) => {
         {content && <Card.Text>{content}</Card.Text>}
         <div className={styles.PostBar}>
           {is_owner ? (
+            // if owner of post, cannot like
             <OverlayTrigger
               placement="top"
               overlay={<Tooltip>You can't like your own post!</Tooltip>}
@@ -112,10 +125,12 @@ const Post = (props) => {
               <i className="far fa-heart" />
             </OverlayTrigger>
           ) : like_id ? (
+            // has post been liked check
             <span onClick={handleUnlike}>
               <i className={`fas fa-heart ${styles.Heart}`} />
             </span>
           ) : currentUser ? (
+            // handle like call to allow like post
             <span onClick={handleLike}>
               <i className={`far fa-heart ${styles.HeartOutline}`} />
             </span>

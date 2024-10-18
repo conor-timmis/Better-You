@@ -45,6 +45,10 @@ function SignInForm() {
     }
   };
 
+  /* 
+    Handles changes and allows
+    for input field data input
+  */
   const handleChange = (event) => {
     setSignInData({
       ...signInData,

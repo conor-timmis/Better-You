@@ -11,10 +11,17 @@ function CommentCreateForm(props) {
   const { post, setPost, setComments, profileImage, profile_id } = props;
   const [content, setContent] = useState("");
 
+  /* 
+    Handles changes to comment input field
+  */
   const handleChange = (event) => {
     setContent(event.target.value);
   };
 
+  /* 
+    Handles submission of comment text input field
+    Increases number of comments by 1
+  */
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -36,7 +43,6 @@ function CommentCreateForm(props) {
       }));
       setContent("");
     } catch (err) {
-      console.log(err);
     }
   };
 

@@ -34,6 +34,9 @@ function PostCreateForm() {
   const imageInput = useRef(null);
   const history = useHistory();
 
+  /* 
+    Handles changes to post create form fields
+  */
   const handleChange = (event) => {
     setPostData({
       ...postData,
@@ -41,6 +44,9 @@ function PostCreateForm() {
     });
   };
 
+  /* 
+    Handles change to the image field (image file)
+  */
   const handleChangeImage = (event) => {
     if (event.target.files.length) {
       URL.revokeObjectURL(image);
@@ -51,6 +57,11 @@ function PostCreateForm() {
     }
   };
 
+  /* 
+    Handles submit of post data
+    if unauthenticated posting is
+    not allowed and error is given
+  */
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData();
@@ -63,13 +74,14 @@ function PostCreateForm() {
       const { data } = await axiosReq.post("/posts/", formData);
       history.push(`/posts/${data.id}`);
     } catch (err) {
-      // console.log(err);
       if (err.response?.status !== 401) {
         setErrors(err.response?.data);
       }
     }
   };
-
+  /* 
+    Form input fields and creation buttons
+  */
   const textFields = (
     <div className="text-center">
       <Form.Group>

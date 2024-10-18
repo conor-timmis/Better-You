@@ -28,6 +28,15 @@ function PostsPage({ message, filter = "" }) {
 
   const currentUser = useCurrentUser();
 
+
+  /*
+    Handles API request by search filters
+    displays only posts linked to search results
+    Displays list of all posts, hearted posts, 
+    followed users posts and posts related to tags 
+    When content is loading, loading spinner is
+    displayed
+  */
   useEffect(() => {
     const fetchPosts = async () => {
       try {
@@ -35,10 +44,12 @@ function PostsPage({ message, filter = "" }) {
         setPosts(data);
         setHasLoaded(true);
       } catch (err) {
-        // console.log(err);
       }
     };
-
+    /*
+      API has search timer to prevent
+      unnecessary requests on keystroke
+    */
     setHasLoaded(false);
     const timer = setTimeout(() => {
       fetchPosts();
@@ -70,6 +81,7 @@ function PostsPage({ message, filter = "" }) {
         {hasLoaded ? (
           <>
             {posts.results.length ? (
+              // InfiniteScroll allows for loading of more posts on scroll
               <InfiniteScroll
                 children={posts.results.map((post) => (
                   <Post key={post.id} {...post} setPosts={setPosts} />
@@ -80,6 +92,7 @@ function PostsPage({ message, filter = "" }) {
                 next={() => fetchMoreData(posts, setPosts)}
               />
             ) : (
+              // No results displays noresults image and message
               <Container className={appStyles.Content}>
                 <Asset src={NoResults} message={message} />
               </Container>

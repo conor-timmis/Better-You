@@ -20,16 +20,25 @@ const NavBar = () => {
 
   const { expanded, setExpanded, ref } = useClickOutsideToggle();
 
+  /*
+    Handles user logout
+    Removes currently logged in user
+    Removes authentication token stored in cookies
+    Redirects to the home page
+  */
   const handleSignOut = async () => {
     try {
       await axios.post("dj-rest-auth/logout/");
       setCurrentUser(null);
       removeTokenTimestamp();
     } catch (err) {
-      // console.log(err);
     }
   };
 
+  /*
+    Icon for "create post"
+    links to posts/create url
+  */
   const addPostIcon = (
     <NavLink
       className={styles.NavLink}
@@ -39,6 +48,12 @@ const NavBar = () => {
       <i className="far fa-plus-square"></i>Add post
     </NavLink>
   );
+  /*
+    loggedInIcons variable to display icons if a user is
+    authenticated / logged in, displays username and 
+    profile picture of current user in navbar with
+    dropdown menu to logout or view my profile
+  */
   const loggedInIcons = (
     <>
       <NavLink
@@ -66,6 +81,11 @@ const NavBar = () => {
       </NavLink>
     </>
   );
+  /*
+    loggedOutIcons variable to display icons if a user is
+    unauthenticated / logged out, icons display in navbar
+    component, shows login or signup links
+  */
   const loggedOutIcons = (
     <>
       <NavLink

@@ -3,6 +3,10 @@ import NoResults from "../assets/no-results.png";
 import styles from "../styles/NotFound.module.css";
 import Asset from "./Asset";
 
+/*
+  404 Theme friendly page for 
+  the user when navigating site
+*/
 const NotFound = () => {
   return (
     <div className={styles.NotFound}>
