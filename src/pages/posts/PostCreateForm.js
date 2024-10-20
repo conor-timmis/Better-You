@@ -15,6 +15,7 @@ import Upload from "../../assets/upload-img.png";
 import styles from "../../styles/PostCreateEditForm.module.css";
 import appStyles from "../../App.module.css";
 import btnStyles from "../../styles/Button.module.css";
+import formStyles from "../../styles/PostCreateEditForm.module.css";
 
 import { useHistory } from "react-router-dom";
 import { axiosReq } from "../../api/axiosDefaults";
@@ -26,10 +27,11 @@ function PostCreateForm() {
 
   const [postData, setPostData] = useState({
     title: "",
+    tags: "",
     content: "",
     image: "",
   });
-  const { title, content, image } = postData;
+  const { title, tags, content, image } = postData;
 
   const imageInput = useRef(null);
   const history = useHistory();
@@ -67,6 +69,7 @@ function PostCreateForm() {
     const formData = new FormData();
 
     formData.append("title", title);
+    formData.append("tags", tags);
     formData.append("content", content);
     formData.append("image", imageInput.current.files[0]);
 
@@ -98,6 +101,32 @@ function PostCreateForm() {
           {message}
         </Alert>
       ))}
+
+      <Form.Group>
+        <Form.Label>Choose a Tag</Form.Label>
+        {errors.tags?.map((message, idx) => (
+          <Alert variant="warning" className={styles.AlertStyles} key={idx}>
+            {message}
+          </Alert>
+        ))}
+        <Form.Control
+          as="select"
+          name="tags"
+          className={`${formStyles.Form}`}
+          value={tags}
+          onChange={handleChange}
+        >
+          <option>Select your tag!</option>
+          <option value="Mindfulness">Mindfulness</option>
+          <option value="Motivation">Motivation</option>
+          <option value="Personal Growth">Personal Growth</option>
+          <option value="Time Management">Time Management</option>
+          <option value="Productivity">Productivity</option>
+          <option value="Goal Setting">Goal Setting</option>
+          <option value="Career Development">Career Development</option>
+          <option value="Leadership">Leadership</option>
+        </Form.Control>
+      </Form.Group>
 
       <Form.Group>
         <Form.Label>Content</Form.Label>
