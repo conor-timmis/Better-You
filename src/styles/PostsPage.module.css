@@ -16,3 +16,29 @@
     cursor: default;
     color: #cfced3;
   }
+  
+  .Tags {
+    background-color: #643dad;
+    cursor: pointer;
+    padding: 5px 10px;
+  }
+  .Tags:hover {
+    background-color: #7700d8;
+    cursor: pointer;
+    transform: scale(1.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  }
+  .Tags span:active {
+    background-color: #2f0055;
+    cursor: pointer;
+    animation: ease-in-out 0.5s;
+  }
+  .PostTags {
+    animation: shake 7s cubic-bezier(0.36, 0.07, 0.19, 0.97) infinite;
+  }
+  .TagIcon {
+    color: #9d4edd;
+  }
+  .TagIcon:hover {
+    cursor: default;
+  }
