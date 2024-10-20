@@ -1,10 +1,51 @@
-.Owner {
-    font-weight: bold;
-    color: #2142b2;
-    margin-right: 8px;
+.CommentSection {
+  color: #9d4edd;
+  padding-top: 10px;
+  margin-bottom: 5px;
+  border-radius: 20px;
+}
+
+.CommentUsername {
+  color: #4c23e8;
+  font-weight: bold;
+  margin-right: 3px;
+}
+
+.Date {
+  font-weight: lighter;
+  color: #66348fc7;
+}
+.DropdownMenu {
+  width: 20%;
+  padding: 0px;
+  color: gray;
+  position: absolute;
+  right: 0;
+  z-index: 99;
+}
+
+.DropdownMenu:hover {
+  color: #9d4edd;
+}
+
+.DropdownMenu i {
+  color: #4c23e8;
+}
+
+.Date {
+  margin-left: 5px;
+  color: #4c23e8;
+  font-weight: 400;
+}
+
+@media (max-width: 576px) {
+  .DropdownMenu {
+    width: 15%;
+    padding: 0px;
+    color: gray;
+    position: absolute;
+    margin-right: 0;
+    right: 0;
+    z-index: 99;
   }
-  
-  .Date {
-    font-weight: lighter;
-    color: #c1c1c5;
-  }
+}

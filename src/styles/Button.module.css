@@ -1,63 +1,32 @@
 .Button {
-    font-size: 0.8rem;
-    align-self: center;
-    border-radius: 100px;
-    border-color: transparent;
-    padding: 4px 10px;
-    margin-left: 2px;
-    margin-right: 2px;
-    min-width: 75px;
-  }
-  
-  .Button:hover {
-    opacity: 0.8;
-    border-color: transparent;
-    cursor: pointer;
-  }
-  
-  .Button:hover:active {
-    background-color: #643dad !important;
-  }
-  
-  .Button:active {
-    background-color: #643dad !important;
-  }
-  
-  .Button:focus {
-    background-color: #643dad;
-  }
-  
-  .Wide {
-    padding: 10px 50px;
-    width: 100%;
-  }
-  
-  .Blue,
-  .BlueOutline:hover,
-  .Bright:hover {
-    background-color: #643dad;
-    color: #ffffff;
-  }
-  
-  .BlueOutline,
-  .Blue:hover {
-    background-color: #ffffff;
-    color: #2142b2;
-  }
-  
-  .Black,
-  .BlackOutline:hover {
-    background-color: #242a3d;
-    color: aliceblue;
-  }
-  
-  .Black:hover,
-  .BlackOutline {
-    background-color: aliceblue;
-    color: #242a3d;
-  }
-  
-  .Bright {
-    background-color: #ffffff;
-    color: #643dad;
-  }
+  align-self: center;
+  min-width: 100px;
+  border-radius: 50px;
+  font-size: 0.9rem;
+  padding: 7.5px;
+  margin: 2px;
+  background-color: #9d4edd;
+  border: 1px solid #9247cf;
+  color: #ffffff;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.19), 0px 6px 6px rgba(0, 0, 0, 0.23);
+  transition: all 0.3s ease-in-out;
+}
+
+.Button:hover {
+  background-color: #9247cf;
+  border-color: #9d4edd;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.Button:active:not(:disabled),
+.Button:focus:not(:disabled) {
+  background-color: #9247cf;
+  border-color: #9d4edd;
+  transform: translateY(1px);
+  outline: none;
+}
+
+.Button:focus {
+  box-shadow: none !important;
+}

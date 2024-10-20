@@ -1,44 +1,50 @@
 .SearchBar input {
-    border-radius: 20px;
-    color: #242a3d;
-    padding-left: 40px;
-    margin-bottom: 16px;
+  border-radius: 20px;
+  color: rgb(104, 2, 104);
+  padding-left: 50px;
+  margin-bottom: 15px;
+}
+
+.SearchBar input:focus {
+  border-color: rgb(160, 160, 160);
+  box-shadow: 0 0 0 0.2rem white;
+}
+
+.SearchIcon {
+  position: absolute;
+  color: rgb(0, 0, 0);
+  font-size: 1.6rem;
+}
+
+.SearchIcon:hover {
+  cursor: pointer;
+  transition: color ease-in-out 0.3s;
+  color: #9d4edd;
+}
+
+.Tags {
+  background-color: #9d4edd;
+  cursor: pointer;
+  padding: 5px 10px;
+}
+
+.Tags:hover {
+  background-color: #7700d8;
+  transform: scale(1.1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.PostTags {
+  text-align: center;
+}
+
+.TagIcon {
+  color: #9d4edd;
+}
+
+@media only screen and (max-width: 767px) {
+  div span img {
+    height: 40px;
+    width: 40px;
   }
-  
-  .SearchIcon {
-    position: absolute;
-    font-size: 1.2rem;
-    padding: 9px;
-    padding-left: 15px;
-  }
-  
-  .SearchIcon:hover {
-    cursor: default;
-    color: #cfced3;
-  }
-  
-  .Tags {
-    background-color: #643dad;
-    cursor: pointer;
-    padding: 5px 10px;
-  }
-  .Tags:hover {
-    background-color: #7700d8;
-    cursor: pointer;
-    transform: scale(1.1);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  }
-  .Tags span:active {
-    background-color: #2f0055;
-    cursor: pointer;
-    animation: ease-in-out 0.5s;
-  }
-  .PostTags {
-    animation: shake 7s cubic-bezier(0.36, 0.07, 0.19, 0.97) infinite;
-  }
-  .TagIcon {
-    color: #9d4edd;
-  }
-  .TagIcon:hover {
-    cursor: default;
-  }
+}
