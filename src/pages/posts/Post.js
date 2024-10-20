@@ -3,9 +3,11 @@ import styles from "../../styles/Post.module.css";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 
 import Card from "react-bootstrap/Card";
+import Badge from "react-bootstrap/Badge";
 import Media from "react-bootstrap/Media";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
+import tagsStyles from "../../styles/PostsPage.module.css";
 
 import { Link, useHistory } from "react-router-dom";
 import Avatar from "../../components/Avatar";
@@ -23,6 +25,7 @@ const Post = (props) => {
     like_id,
     title,
     content,
+    tags,
     image,
     updated_at,
     postPage,
@@ -115,6 +118,13 @@ const Post = (props) => {
       <Card.Body>
         {title && <Card.Title className="text-center">{title}</Card.Title>}
         {content && <Card.Text>{content}</Card.Text>}
+        {tags && (
+            <Card.Text>
+              <Badge variant="primary" className={tagsStyles.Tags}>
+                <span>{tags}</span>
+              </Badge>
+            </Card.Text>
+        )}
         <div className={styles.PostBar}>
           {is_owner ? (
             // if owner of post, cannot like
