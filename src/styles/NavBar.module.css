@@ -85,9 +85,3 @@ a:hover {
 .NavLink:hover {
   animation: btngentleshake 0.5s ease-in-out, bounce 0.5s ease-in-out;
 }
-
-@media (max-width: 768px) {
-  .navbar-logo {
-    height: 30px;
-  }
-}

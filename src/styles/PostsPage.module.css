@@ -42,9 +42,9 @@
   color: #9d4edd;
 }
 
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 992px) {
   div span img {
-    height: 40px;
-    width: 40px;
+    height: 30px;
+    width: auto;
   }
 }
