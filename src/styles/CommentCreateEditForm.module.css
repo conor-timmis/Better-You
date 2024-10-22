@@ -1,8 +1,17 @@
+.Form {
+  color: #9d4edd;
+  border-color: #9247cf;
+  padding-left: 15px;
+  border-radius: 20px !important;
+  resize: none;
+}
+
 .CommentEntryForm {
   color: #9d4edd;
   border-color: #9247cf;
   padding-left: 15px;
   border-radius: 20px !important;
+  resize: none;
 }
 
 .CommentEntryForm:focus {
@@ -28,6 +37,7 @@
   color: white;
   box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
 }
+
 .CommentButton:hover {
   background-color: #9247cf;
   border-color: #9d4edd;

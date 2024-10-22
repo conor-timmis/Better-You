@@ -54,7 +54,7 @@ function CommentEditForm(props) {
     <Form onSubmit={handleSubmit}>
       <Form.Group className="pr-1">
         <Form.Control
-          className={styles.Form}
+          className={styles.CommentEntryForm}
           as="textarea"
           value={formContent}
           onChange={handleChange}
@@ -64,18 +64,18 @@ function CommentEditForm(props) {
       <StarRating rating={formRating} setRating={setFormRating} />
       <div className="text-right">
         <button
-          className={styles.Button}
+          className={styles.CancelCommentEditButton}
           onClick={() => setShowEditForm(false)}
           type="button"
         >
-          cancel
+          Cancel
         </button>
         <button
-          className={styles.Button}
+          className={styles.CommentButton}
           disabled={!formContent.trim()}
           type="submit"
         >
-          save
+          Save
         </button>
       </div>
     </Form>

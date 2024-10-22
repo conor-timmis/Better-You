@@ -13,14 +13,14 @@ function CommentCreateForm(props) {
 
   /*
     Handles changes to comment input field
-   */
+  */
   const handleChange = (event) => {
     setContent(event.target.value);
   };
 
   /*
     Handles submission of comment text input and rating
-   */
+  */
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -75,7 +75,7 @@ function CommentCreateForm(props) {
         disabled={!content.trim()}
         type="submit"
       >
-        post
+        Post
       </button>
     </Form>
   );
