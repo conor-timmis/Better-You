@@ -17,6 +17,7 @@ const Comment = (props) => {
     updated_at,
     content,
     id,
+    rating,
     setPost,
     setComments,
   } = props;
@@ -25,11 +26,10 @@ const Comment = (props) => {
   const currentUser = useCurrentUser();
   const is_owner = currentUser?.username === owner;
 
-  /*
-    Handles delete of comment based on comment id
-    Removes comment and decreases comments_total by 
-    1
-  */
+  /**
+   * Handles the deletion of a comment based on comment id.
+   * Removes the comment and decreases comments_total by 1.
+   */
   const handleDelete = async () => {
     try {
       await axiosRes.delete(`/comments/${id}/`);
@@ -70,7 +70,16 @@ const Comment = (props) => {
                 setShowEditForm={setShowEditForm}
               />
             ) : (
-              <p>{content}</p>
+              <>
+                <p>{content}</p>
+                <div>
+                  {Array.from({ length: 5 }, (_, index) => (
+                    <span key={index}>
+                      {index < rating ? '⭐' : '☆'}
+                    </span>
+                  ))}
+                </div>
+              </>
             )}
           </div>
           {is_owner && !showEditForm && (
