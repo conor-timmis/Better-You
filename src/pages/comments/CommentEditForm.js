@@ -1,14 +1,14 @@
 import React, { useState } from "react";
-
 import Form from "react-bootstrap/Form";
 import { axiosRes } from "../../api/axiosDefaults";
-
 import styles from "../../styles/CommentCreateEditForm.module.css";
+import StarRating from "../../components/StarRating";
 
 function CommentEditForm(props) {
-  const { id, content, setShowEditForm, setComments } = props;
+  const { id, content, rating, setShowEditForm, setComments } = props;
 
   const [formContent, setFormContent] = useState(content);
+  const [formRating, setFormRating] = useState((rating || 0) * 20);
   
   /* 
     Handles changes to form input field
@@ -25,8 +25,11 @@ function CommentEditForm(props) {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
+      const adjustedRating = Math.round(formRating / 20);
+
       await axiosRes.put(`/comments/${id}/`, {
         content: formContent.trim(),
+        rating: adjustedRating,
       });
       setComments((prevComments) => ({
         ...prevComments,
@@ -35,6 +38,7 @@ function CommentEditForm(props) {
             ? {
                 ...comment,
                 content: formContent.trim(),
+                rating: adjustedRating,
                 updated_at: "now",
               }
             : comment;
@@ -42,6 +46,7 @@ function CommentEditForm(props) {
       }));
       setShowEditForm(false);
     } catch (err) {
+      console.error(err);
     }
   };
 
@@ -56,6 +61,7 @@ function CommentEditForm(props) {
           rows={2}
         />
       </Form.Group>
+      <StarRating rating={formRating} setRating={setFormRating} />
       <div className="text-right">
         <button
           className={styles.Button}
@@ -66,7 +72,7 @@ function CommentEditForm(props) {
         </button>
         <button
           className={styles.Button}
-          disabled={!content.trim()}
+          disabled={!formContent.trim()}
           type="submit"
         >
           save
