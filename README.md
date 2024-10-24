@@ -23,6 +23,10 @@ Welcome to Better You, the social platform dedicated to anybody looking to furth
     - [API Integration](#api-integration)
     - [Data Validation](#data-validation)
     - [Error Messaging](#error-messaging)
+4. [User Interface Design](#4-user-interface-design)
+    - [Wireframes](#wireframes)
+    - [Colour Scheme](#colour-scheme)
+    - [Icons](#icons)
 
 ## 1. Purpose
 
@@ -220,3 +224,46 @@ Comprehensive data format specifications are available in the API repository's R
 
 The Django REST API back end will return relevant HTTP status codes, allowing the React front end to show clear error messages to users, which helps them identify and fix problems. However, since the front end is designed to avoid situations that could cause 400, 404, or other errors, only a limited number of error messages are needed. The API error codes are documented to assist with any direct API access or use by different front ends.                                                                                       |
 
+## 4. User Interface Design
+
+
+### Wireframes
+
+The wireframes were created using Balsamiq and they illustrate the core user interface and functionality of Better You from a monitor and mobile device perspective. These visual guides serve as the blueprint for the structure and design of the application, ensuring a cohesive and intuitive user experience.
+
+#### Home Page
+
+![Home Page](documentation/wireframes/home.png)
+
+#### Feed
+
+![Feed Wireframe](documentation/wireframes/feed.png)
+
+#### Liked
+
+![Explore](documentation/wireframes/feed.png)
+
+#### My Profile
+
+Default View:
+![Profile](documentation/wireframes/profile.png)
+
+Profile Edit View:
+![Profile Editing](documentation/wireframes/profile-edit.png)
+
+#### Sign Up
+
+![Sign Up](documentation/wireframes/signup.png)
+
+
+### Colour Scheme
+
+I aimed to choose a simple yet vibrant color scheme for the site to keep it visually appealing and easy to navigate. The goal is to avoid making the design feel "confusing" and ensure that the colors work well together, making navigation smooth and intuitive, I have chosen to display my colour scheme with a site called [Coolors](https://coolors.co/) as it is perfect for displaying all the prominent colours used throughout my project.
+
+![Coolors](documentation/coolors.png)
+
+### Icon
+
+I generated my Logo & Favicon through a site called [Logo](https://logo.com/) and I wanted a very basic and even somewhat corporate but also a meaningful icon that will be memorable to look at after using the site, as I feel like Logo and display/meaning has its own purpose for a site of this size.
+
+![Better You Logo](public/favicon.png)
