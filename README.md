@@ -27,6 +27,18 @@ Welcome to Better You, the social platform dedicated to anybody looking to furth
     - [Wireframes](#wireframes)
     - [Colour Scheme](#colour-scheme)
     - [Icons](#icons)
+5. [Testing](#5-testing)
+    - [Continuous Testing](#continuous-testing)
+    - [Manual Testing](#manual-testing)
+    - [Functional Testing](#functional-testing)
+    - [Browser Compatibility and Screen Size Responsiveness](#browser-compatibility-and-screen-size-responsiveness)
+    - [Code Validation](#code-validation)
+    - [Accessibility](#accessibility)
+6. [Bugs](#6-bugs)
+7. [Set Up and Deployment](#7-set-up-and-deployment)
+    - [Libraries](#libraries)
+    - [React Set Up](#running-locally)
+    - [Deployment](#deployment)
 
 ## 1. Purpose
 
@@ -89,7 +101,7 @@ Here’s a revised and more polished version of your "Features" section:
 
 ### Brief Competitor Analysis and Target Demographic
 
-When analysing competitors in the realm of online portfolio platforms for artists, several notable options come to mind:
+When analysing competitors in the realm of online portfolio platforms for Self Improvement, several notable options come to mind:
 
 -   Instagram is widely used by influencers and individuals in the self-improvement niche to share motivational content, personal growth stories, and wellness tips. However, its broad focus on various content types makes it less specialized for dedicated personal development journeys and lacks built-in tools to track progress or growth.
 -   Coach.me is a platform that combines personal goal-setting with community support. It offers coaching services and goal tracking to help users develop new habits. However, its interaction is more focused on coaching and less on community-building for like-minded individuals to share their journeys.
@@ -267,3 +279,191 @@ I aimed to choose a simple yet vibrant color scheme for the site to keep it visu
 I generated my Logo & Favicon through a site called [Logo](https://logo.com/) and I wanted a very basic and even somewhat corporate but also a meaningful icon that will be memorable to look at after using the site, as I feel like Logo and display/meaning has its own purpose for a site of this size.
 
 ![Better You Logo](public/favicon.png)
+
+
+## 5. Testing
+
+### Continuous Testing
+
+Using a combination of automated tests written with Jest and manual testing from the frontend, I achieved comprehensive test coverage. I also ran the code through validators and linters to ensure adherence to coding standards and best practices, aiming for robust and maintainable code.
+
+### Manual Testing
+
+My manual testing covered:
+
+-   Each user journey from end to end - see [User Journeys section](#user-journeys).
+-   The level of access when logged out
+-   The level of access when logged in and whether the user could only access their own personal details and posts of functionality intended only for them
+
+Below is a breakdown of the key areas: 
+
+1. **User Registration and Authentication**
+
+**Goal**: To verify that users can register, log in, and log out correctly.
+
+**Steps**:
+- Registered with valid credentials.
+- Tried to register with invalid credentials (e.g., password mismatch).
+- Logged in successfully with valid credentials.
+- Tried logging in with incorrect credentials to ensure error messages appeared.
+- Logged out and confirmed access to restricted pages was denied after logout.
+
+**Edge Cases**:
+- Tried to submit empty or incomplete forms, ensuring appropriate validation messages appeared.
+- Attempted to access restricted pages without logging in and verified redirection to the login page.
+- Tried to use a duplicate email for registration and ensured that the API prevented it with an appropriate error message.
+
+2. **Profile Management**
+
+**Goal**: To confirm that users can view and edit their profile correctly, including adding a profile image URL and updating personal details.
+
+**Steps**:
+- Logged in, navigated to "Profile", and edited profile details (username, biography, profile image URL).
+- Ensured the updated profile details were reflected immediately on the UI.
+
+**Edge Case**:
+- Left profile fields empty to test form validation.
+
+3. **Post Creation, Editing, and Deletion**
+
+**Goal**: To test the full lifecycle of post management—creating, editing, and deleting a post.
+
+**Steps**:
+- Created a new post by filling out all required fields and submitting the form.
+- Edited an existing post, updating the title, post and tag.
+- Deleted a post and confirmed it no longer appeared on the "Profile" page.
+
+**Edge Cases**:
+- Left mandatory fields (title, image URL) empty to check if the form prevented submission.
+- Checked that only the owner of a post could edit or delete it, ensuring permission boundaries were respected.
+
+4. **Browsing and Interacting with Posts**
+
+**Goal**: To ensure that users can browse, search, filter, and interact with posts (e.g., commenting, rating).
+
+**Steps**:
+- Used the search bar and filters on the Explore page to find specific posts.
+- Commented on a post and verified that the comment appeared.
+- Rated a post and ensured the rating updated correctly in the API.
+
+**Edge Cases**:
+- Tried submitting an empty comment and verified that the form did not allow it.
+- Checked that users could not rate their own posts by confirming the rating UI was hidden for the post owner.
+
+5. **Feed**
+
+**Goal**: To confirm that users can view their personalised feed (who they follow, their posts).
+
+**Steps**:
+- Follow a new user who has not made any posts.
+- Refresh the feed to confirm that the feed does not show any empty or placeholder content for the followed user’s posts.
+- Confirm that the feed shows posts only from users with available posts and handles the absence of posts gracefully.
+
+**Edge Case**:
+- The feed does not display any placeholder or "missing" posts for users who haven’t posted yet, and it continues to display posts from other users normally. The UI should indicate the absence of posts from the newly followed user without errors.
+
+This made up the bulk of the testing and was carried out continuously throughout the build, ensuring each change had the intended result.
+
+### Functional Testing
+
+Functional testing focused on ensuring that each component worked as intended and handled user interaction smoothly. This included testing functionality such as:
+
+**Navigation**: Verified that all links, including internal navigation, worked correctly (e.g., clicking on a profile, going to the posts detail page).
+**Search and Filtering**: Checked that search and filter inputs dynamically updated results and that the system performed as expected with both broad and narrow search terms.
+
+### Browser Compatibility and Screen Size Responsiveness
+
+I viewed the site on each of the three key screen sizes (mobile, tablet and computer), using devtools, on three of the most popular browsers. 
+
+Pixel references for each of the screen sizes:
+
+| Screen             | Pixels |
+| ------------------ | ------ |
+| Mobile - iPhone SE | 375px  |
+| Tablet - iPad Mini | 768px  |
+| Computer           | 1920px |
+
+| Browser | Screen Size       | Appearance | Responsiveness |
+| ------- | ----------------- | ---------- | -------------- |
+| Chrome  | Mobile            | Good       |     Good       |
+|         | Tablet            | Good       |     Good       |
+|         | Computer          | Good       |     Good       |
+| Firefox | Mobile            | Good       |     Good       |
+|         | Tablet            | Good       |     Good       |
+|         | Computer          | Good       |     Good       |
+| Arc     | Mobile            | Good       |     Good       |
+|         | Tablet            | Good       |     Good       |
+|         | Computer          | Good       |     Good       |
+
+**Goal**: To verify that the site is fully responsive across different screen sizes and that the UI adapts correctly on mobile devices.
+
+**Steps**:
+- Used dev tools to simulate mobile (iPhone SE), tablet (iPad Mini), and computer (1920px) views in Chrome, Firefox, and Safari.
+- Ensured that components e.g. the navigation bar, post cards and comments page were usable and well-formatted on smaller screens.
+- Ensured that each page looked as intended on all screen sizes.
+
+### Code Validation
+
+| Language   | Validation Method                                                             | Outcome |
+| ---------- | ----------------------------------------------------------------------------- | ------- |
+| HTML       | Via direct input on [W3C HTML Validator](https://validator.w3.org/)           |  No errors |
+| CSS        | Via direct input on [W3C CSS Validator](https://jigsaw.w3.org/css-validator/) |  No errors |
+| JavaScript | Via command line [ES Lint](https://eslint.org/)                               |  No errors |
+
+
+### Accessibility
+
+**Lighthouse**
+
+To ensure the front end of my program was accessible I used Lighthouse and recorded the final results for each page below:
+
+| Page | Result |
+| ---- | ------ |
+| Home | ![Home](documentation/lighthouse/home.png) |
+| Login | ![Login](documentation/lighthouse/login.png) |
+| Feed | ![Feed](documentation/lighthouse/feed.png) |
+| Liked | ![Liked](documentation/lighthouse/liked.png) |
+| Profile View | ![Profile](documentation/lighthouse/profile.png) |
+| Post Detail | ![Post](documentation/lighthouse/post.png) |
+| Create Post | ![Create Post](documentation/lighthouse/createpost.png) |
+
+## 6. Bugs
+
+Here is a list showing a selection of bugs found towards the end of development. This list is not exhaustive but is intended to give a sample of the types of things that were found and fixed. I don't believe I have left any unresolved bugs.
+
+### Bug One
+
+Issue: As I followed the lessons with Moments & DRF API, I had some major issues with setup and at one point, my API was still at a point where it could not communicate with my Frontend and vice versa. The result of this was when both were deployed, the front deployed site would simply not allow me to use the navbar as intended and assume every session was "logged in" but also unable to access any other pages. Though it did this, the Gitpod environment live version would work as intended.
+
+![Bug One](documentation/bugs/bug1.png)
+
+Fix: Once the API was setup as intended, and with the Frontend allowed in CORS & ALLOWED_HOSTS the Frontend was able to be used as fully intended as well as the whole site.
+
+![Bug One Fixed](documentation/features/navbar-loggedout.png)
+![Bug One Fixed](documentation/features/navbar-loggedin.png)
+
+
+## 7. Set Up and Deployment
+
+### Libraries
+
+Several front end libraries were utilised during this project. Below I set out which ones, their purpose and my reasoning for using them. 
+
+| **Library**            | **Purpose**                                                                 | **Reasoning**                                                |
+|------------------------|-----------------------------------------------------------------------------|---------------------------------------------------------------------|
+| **React** | A JavaScript library for building user interfaces. | React's component-based structure makes it easy to manage the dynamic UI in this project by keeping the code modular, reusable, and efficient when it comes to rendering and managing state.|
+| **React Router** | Enables routing and navigation in single-page applications. | Handles navigation and dynamic route management smoothly, making it easy to switch between pages like profiles, posts, and searches, while keeping the URL structure clean and organised. |
+| **React Bootstrap**  | A UI framework that provides pre-built responsive components.  | Speeds up UI development with ready-made, responsive components like forms, buttons, and modals. This keeps the app's design consistent and cuts down on the need for writing custom CSS. |
+| **Font Awesome** | A library of vector icons for use in the UI.  | Provides a wide range of customisable icons that enhance the visual appeal and user experience by providing clear, intuitive cues (like notification and profile icons), all without adding much overhead to the project. |
+| **Axios**  | A promise-based HTTP client for making requests to APIs. | Simplifies making asynchronous HTTP requests to the backend, including handling authentication tokens and error management. |
+| **Simple Star Rating**  | A rating system for React Apps. | Creates a visual view of Rating in the form of stars (typically 1-5) with the use of mouseover action. |
+
+
+### Running Locally
+
+-   Install Node and npm
+-   Install the dependencies by running: `npm install`
+
+### Deployment
+
+This project was deployed to the [Heroku](https://id.heroku.com/login) Web Application hosting platform.
