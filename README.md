@@ -39,6 +39,10 @@ Welcome to Better You, the social platform dedicated to anybody looking to furth
     - [Libraries](#libraries)
     - [React Set Up](#running-locally)
     - [Deployment](#deployment)
+8. [Agile Methodology](#8-agile-methodology)
+    - [Epics and User Stories](#epics-and-user-stories)
+9. [Future Development](#9-future-development)
+10. [Credits](#10-credits)
 
 ## 1. Purpose
 
@@ -467,3 +471,111 @@ Several front end libraries were utilised during this project. Below I set out w
 ### Deployment
 
 This project was deployed to the [Heroku](https://id.heroku.com/login) Web Application hosting platform.
+
+
+## 8. Agile Methodology
+
+After getting both repositories set up and all planning carried out, both READMEs in both repositories were updated with as much information as possible up front, to have a strong basis from which to develop. I then set this project up in GitHub projects using Agile methodology. This facilitated my prioritisation and time management. I added the high level epics, created the user stories as issues within them, created the three one-week sprints I intended to complete the development portion of this project in, and populated the first sprint.
+
+### Epics and User Stories
+
+My user stories can be seen in full in the associated GitHub Project on my repo. This is where all the details, including tasks and acceptance criteria can be seen. These user stories have been assigned to Epics.
+
+| Epic                | Stories                                                                 |
+| ------------------- | ----------------------------------------------------------------------- |
+| **User Authentication**   | Login & Signup View, User Authentication Tokens                    |
+|                     | Mobile Responsiveness                                                   |
+| **User Management**       | User Profile Info View, Edit Profile Picture                       |
+|                     | Profile Bio Update                                                      |
+| **Post Management**       | Post Editing, Post Date                                           |
+|                     | Post Commenting, Comment Date, Comment Deleting                         |
+| **Social Interactions**   | Follow and Unfollow Users, Liking Posts                           |
+|                     | View My Liked Posts, Other Users’ Profile Pictures                      |
+| **Browsing Posts**        | View Posts Associated to Tags, Infinite Post Scrolling            |
+|                     | Filter Posts by Search, Post Tags, Post Date Ordering                   |
+|                     | No Results Found Error Page                                             |
+| **Post Page**             | Commenting, Post Date, Infinite Post Scrolling                    |
+|                     | Website Navigation                                                      |
+| **User’s Profile Page**   | View My Liked Posts, Profile Bio Update                           |
+|                     | Edit Profile Picture                                                    |
+
+### Sprint One:
+
+![Sprint One Screenshot](documentation/sprints/sprint1.png)
+
+During Sprint One, I prioritized core functionalities for user authentication and initial profile setup, which laid the groundwork for the rest of the project. The must-have item was the connection between the frontend and backend, creating a foundation for user interaction and authentication flows.
+    
+  Retrospective:
+
+ - Achievements: Successfully completed the initial "thin slice," connecting placeholder frontend and backend components.
+ - Progress: Established a deployable, stable environment that supports future development.
+ - Challenges: Limited development time and difficulties with Cross-Origin Resource Sharing (CORS) configurations delayed progress.
+ - Action Next Sprint: The next goal is to build the primary page structures with mock data, preparing the backend for further functionality in future sprints.
+
+### Sprint Two:
+
+![Sprint Two Screenshot](documentation/sprints/sprint2.png)
+
+Sprint Two expanded on the foundational work from Sprint One by implementing essential pages, models, views, and API endpoints. This sprint focused on creating the basic home and user details pages as must-haves, enabling user experience enhancement through improved navigation and interactivity features.
+
+Retrospective:
+
+ - Achievements: Completed all assigned frontend pages and backend API components.
+ - Progress: Successfully established models, views, and endpoints for seamless frontend-backend integration.
+ - Challenges: Switching between frontend and backend development proved challenging, especially with context-switching demands. Several new stories replaced existing ones to better address project requirements.
+ - Action Next Sprint: The goal for Sprint Three is to integrate the frontend and backend fully, and complete primary features.
+
+### Sprint Three:
+
+![Sprint Three Screenshot](documentation/sprints/sprint3.png)
+
+Sprint Three prioritized API integration, aiming to finalize the backend’s connection to all user-facing elements. The must-have items included completing API integration, while should-have tasks included post editing and search functionality.
+    
+Retrospective:
+
+ - Achievements: Finalized all primary user stories and established full API integration.
+ - Progress: The majority of development work was completed, leaving only minor polish, bug fixes, and documentation for final review.
+ - Challenges: API integration required more time than anticipated due to the complexity of data handling across modules.
+
+### Sprint Four:
+
+![Sprint Four Screenshot](documentation/sprints/sprint4.png)
+
+Sprint Four focused on refining existing features and adding additional functionality for a complete user experience. Must-have tasks included implementing interactive elements such as post commenting, post tags, and liking posts, which enhance user engagement. Should-have items addressed features like comment editing, ensuring flexibility in user interactions. Low-priority items, such as post and comment timestamps, were included to enhance post organization and contextual relevance.
+
+ - Achievements: Successfully implemented interactive and detail-oriented features, rounding out core functionality.
+ - Progress: The project now offers a robust experience with fully integrated social and interactive elements.
+ - Challenges: Balancing these last features with quality testing required careful time management, as these additions impacted user experience significantly.
+ - Action After this Last Sprint: Following the completion of Sprint Four, only final QA, bug fixes, project documentation and user testing remain.
+
+## 9. Future Development
+
+-  Add Password Reset functionality for users that have forgotten their password or want to change it.
+-  Allow users to indicate where a post belongs to more than one tag at a time.
+-  Allow users to be included on the same post where they've collaborated with potential for tagging, "with user X" for example.
+
+
+## 10. Credits
+
+-   I built my flowcharts using [Mermaid](https://mermaid.js.org/syntax/flowchart.html) in my readme.
+-   I visually represented my colour palette using [coolors](https://coolors.co/).
+-   I sourced my icons from [Font Awesome](https://fontawesome.com/).
+-   I generated my Favicon & Logo with [Logo](https://logo.com/)
+-   The "upload-img" Upload Image I found over at [Flaticon](https://www.flaticon.com/free-icon/upload_8045653)
+-   The Sign In and Sign Up form images were found over at [Unsplash](https://plus.unsplash.com/premium_photo-1672115680958-54438df0ab82?q=80&w=1768&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdl) & [Unsplash](https://images.unsplash.com/photo-1600298882283-40b4dcb8b211?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D) for more atmosphere on these pages.
+- I used [ESLint](https://eslint.org/) for code validation via the command line.
+
+
+I also used the documentation of all the elements included in this project:
+
+-   [React](https://react.dev/reference/react)
+-   [React-Bootstrap](https://react-bootstrap.netlify.app/docs/getting-started/introduction)
+-   [Simple Star Rating v4.0.5 by awran5](https://github.com/awran5/react-simple-star-rating)
+
+
+
+### Acknowledgements
+
+
+- I would like to thank my Code Institute mentor, [Gareth McGirr](https://github.com/Gareth-McGirr) for his support throughout the development of this project and helping me with a few errors, suggesting new ideas and boosting morale.
+- I would like to thank the [Code Institute](https://codeinstitute.net) tutor team for their assistance with troubleshooting and debugging some project issues.
