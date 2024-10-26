@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useMemo, useState } from "react";
+import React, { createContext, useContext, useEffect, useMemo, useState } from "react";
 import axios from "axios";
 import { axiosReq, axiosRes } from "../api/axiosDefaults";
 import { useHistory } from "react-router-dom";
@@ -10,21 +10,26 @@ export const SetCurrentUserContext = createContext();
 export const useCurrentUser = () => useContext(CurrentUserContext);
 export const useSetCurrentUser = () => useContext(SetCurrentUserContext);
 
+/**
+ * CurrentUserProvider component that fetches the current user data
+ * and manages user authentication tokens.
+ *
+ * @param {React.PropsWithChildren} children - The child components that will be wrapped.
+ */
 export const CurrentUserProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
   const history = useHistory();
 
-  /*
-    handleMount function that logs user
-    out if their authentication token
-    cookie has expired, request of user
-    data when component is mounted
-  */
+  /**
+   * handleMount function that logs the user out if their authentication
+   * token cookie has expired and requests user data when the component is mounted.
+   */
   const handleMount = async () => {
     try {
       const { data } = await axiosRes.get("dj-rest-auth/user/");
       setCurrentUser(data);
     } catch (err) {
+      console.error("Failed to fetch current user:", err);
     }
   };
 
@@ -32,26 +37,20 @@ export const CurrentUserProvider = ({ children }) => {
     handleMount();
   }, []);
 
-  /* 
-    Handles user authentication tokens
-    If refresh token fails, redirect to
-    log in page
-  */
+  /**
+   * Handles user authentication tokens. If the refresh token fails,
+   * redirects to the login page.
+   */
   useMemo(() => {
-    axiosReq.interceptors.request.use(
+    const requestInterceptor = axiosReq.interceptors.request.use(
       async (config) => {
         if (shouldRefreshToken()) {
           try {
             await axios.post("/dj-rest-auth/token/refresh/");
           } catch (err) {
-            setCurrentUser((prevCurrentUser) => {
-              if (prevCurrentUser) {
-                history.push("/signin");
-              }
-              return null;
-            });
+            setCurrentUser(null);
+            history.push("/signin");
             removeTokenTimestamp();
-            return config;
           }
         }
         return config;
@@ -61,25 +60,15 @@ export const CurrentUserProvider = ({ children }) => {
       }
     );
 
-    /*
-      Refreshes access_token if 401 error
-      This request on IOS is returning a 401,
-      which causes the catch block to hit and 
-      then wont login
-    */
-    axiosRes.interceptors.response.use(
+    const responseInterceptor = axiosRes.interceptors.response.use(
       (response) => response,
       async (err) => {
         if (err.response?.status === 401) {
           try {
             await axios.post("/dj-rest-auth/token/refresh/");
-          } catch (err) {
-            setCurrentUser((prevCurrentUser) => {
-              if (prevCurrentUser) {
-                history.push("/signin");
-              }
-              return null;
-            });
+          } catch (refreshError) {
+            setCurrentUser(null);
+            history.push("/signin");
             removeTokenTimestamp();
           }
           return axios(err.config);
@@ -87,6 +76,11 @@ export const CurrentUserProvider = ({ children }) => {
         return Promise.reject(err);
       }
     );
+
+    return () => {
+      axiosReq.interceptors.request.eject(requestInterceptor);
+      axiosRes.interceptors.response.eject(responseInterceptor);
+    };
   }, [history]);
 
   return (

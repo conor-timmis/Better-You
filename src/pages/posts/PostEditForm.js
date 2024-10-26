@@ -18,7 +18,6 @@ import { axiosReq } from "../../api/axiosDefaults";
 
 function PostEditForm() {
   const [errors, setErrors] = useState({});
-
   const [postData, setPostData] = useState({
     title: "",
     tags: "",
@@ -46,6 +45,7 @@ function PostEditForm() {
 
         is_owner ? setPostData({ title, tags, content, image }) : history.push("/");
       } catch (err) {
+        console.error("Error fetching post data:", err);
       }
     };
 
@@ -99,6 +99,8 @@ function PostEditForm() {
     } catch (err) {
       if (err.response?.status !== 401) {
         setErrors(err.response?.data);
+      } else {
+        console.error("Unauthorized request:", err);
       }
     }
   };
@@ -167,10 +169,10 @@ function PostEditForm() {
         className={`${btnStyles.Button} ${btnStyles.Blue}`}
         onClick={() => history.goBack()}
       >
-        cancel
+        Cancel
       </Button>
       <Button className={`${btnStyles.Button} ${btnStyles.Blue}`} type="submit">
-        save
+        Save
       </Button>
     </div>
   );

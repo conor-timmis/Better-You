@@ -42,6 +42,7 @@ const Post = (props) => {
   const handleEdit = () => {
     history.push(`/posts/${id}/edit`);
   };
+
   /*
     Handles delete of post by id,
     pushes user to home after
@@ -51,13 +52,15 @@ const Post = (props) => {
       await axiosRes.delete(`/posts/${id}/`);
       history.goBack();
     } catch (err) {
+      console.error("Error deleting post:", err); // Log the error
     }
   };
+
   /*
     Handles like on a post by a user,
     sends API request for a post by id
     and by what profile_id likes it,
-    increses like total by one
+    increases like total by one
   */
   const handleLike = async () => {
     try {
@@ -71,8 +74,10 @@ const Post = (props) => {
         }),
       }));
     } catch (err) {
+      console.error("Error liking post:", err); // Log the error
     }
   };
+
   /*
     Handles unlike on a post by a user,
     sends API request for a post by id
@@ -90,6 +95,7 @@ const Post = (props) => {
         }),
       }));
     } catch (err) {
+      console.error("Error unliking post:", err); // Log the error
     }
   };
 
@@ -130,7 +136,7 @@ const Post = (props) => {
             // if owner of post, cannot like
             <OverlayTrigger
               placement="top"
-              overlay={<Tooltip>You can't like your own post!</Tooltip>}
+              overlay={<Tooltip>You can&apos;t like your own post!</Tooltip>}
             >
               <i className="far fa-heart" />
             </OverlayTrigger>

@@ -4,7 +4,7 @@ import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
-import Badge from "react-bootstrap/Badge"
+import Badge from "react-bootstrap/Badge";
 
 import Post from "./Post";
 import Asset from "../../components/Asset";
@@ -29,7 +29,6 @@ function PostsPage({ message, filter = "" }) {
   const [query, setQuery] = useState("");
 
   const currentUser = useCurrentUser();
-
 
   /*
     Handles API request by search filters
@@ -90,14 +89,15 @@ function PostsPage({ message, filter = "" }) {
             {posts.results.length ? (
               // InfiniteScroll allows for loading of more posts on scroll
               <InfiniteScroll
-                children={posts.results.map((post) => (
-                  <Post key={post.id} {...post} setPosts={setPosts} />
-                ))}
                 dataLength={posts.results.length}
                 loader={<Asset spinner />}
                 hasMore={!!posts.next}
                 next={() => fetchMoreData(posts, setPosts)}
-              />
+              >
+                {posts.results.map((post) => (
+                  <Post key={post.id} {...post} setPosts={setPosts} />
+                ))}
+              </InfiniteScroll>
             ) : (
               // No results displays noresults image and message
               <Container className={appStyles.Content}>
@@ -115,77 +115,75 @@ function PostsPage({ message, filter = "" }) {
         <PopularProfiles />
       </Col>
       <Col className="py-2 p-0 p-lg-2" lg={3}>
-      <Container
-      className={`${appStyles.Content} mb-3 mt-3 d-none d-lg-block`}
-      >
-        <p className={`${styles.PostTags} font-weight-bold text-center`}>
-          <i className={`${styles.TagIcon} fas fa-tag`} ></i> Search by Post Tags
+        <Container className={`${appStyles.Content} mb-3 mt-3 d-none d-lg-block`}>
+          <p className={`${styles.PostTags} font-weight-bold text-center`}>
+            <i className={`${styles.TagIcon} fas fa-tag`} ></i> Search by Post Tags
           </p>
           <Badge
-          variant="primary"
-          pill
-          className={`${styles.Tags}`}
-          onClick={() => setTags("Mindfulness")}
+            variant="primary"
+            pill
+            className={`${styles.Tags}`}
+            onClick={() => setTags("Mindfulness")}
           >
             Mindfulness
-            </Badge>
-            <Badge
-          variant="primary"
-          pill
-          className={`${styles.Tags}`}
-          onClick={() => setTags("Motivation")}
+          </Badge>
+          <Badge
+            variant="primary"
+            pill
+            className={`${styles.Tags}`}
+            onClick={() => setTags("Motivation")}
           >
             Motivation
-            </Badge>
-            <Badge
-          variant="primary"
-          pill
-          className={`${styles.Tags}`}
-          onClick={() => setTags("Personal Growth")}
+          </Badge>
+          <Badge
+            variant="primary"
+            pill
+            className={`${styles.Tags}`}
+            onClick={() => setTags("Personal Growth")}
           >
             Personal Growth
-            </Badge>
-            <Badge
-          variant="primary"
-          pill
-          className={`${styles.Tags}`}
-          onClick={() => setTags("Time Management")}
+          </Badge>
+          <Badge
+            variant="primary"
+            pill
+            className={`${styles.Tags}`}
+            onClick={() => setTags("Time Management")}
           >
             Time Management
-            </Badge>
-            <Badge
-          variant="primary"
-          pill
-          className={`${styles.Tags}`}
-          onClick={() => setTags("Productivity")}
+          </Badge>
+          <Badge
+            variant="primary"
+            pill
+            className={`${styles.Tags}`}
+            onClick={() => setTags("Productivity")}
           >
             Productivity
-            </Badge>
-            <Badge
-          variant="primary"
-          pill
-          className={`${styles.Tags}`}
-          onClick={() => setTags("Goal Setting")}
+          </Badge>
+          <Badge
+            variant="primary"
+            pill
+            className={`${styles.Tags}`}
+            onClick={() => setTags("Goal Setting")}
           >
             Goal Setting
-            </Badge>
-            <Badge
-          variant="primary"
-          pill
-          className={`${styles.Tags}`}
-          onClick={() => setTags("Career Development")}
+          </Badge>
+          <Badge
+            variant="primary"
+            pill
+            className={`${styles.Tags}`}
+            onClick={() => setTags("Career Development")}
           >
             Career Development
-            </Badge>
-            <Badge
-          variant="primary"
-          pill
-          className={`${styles.Tags}`}
-          onClick={() => setTags("Leadership")}
+          </Badge>
+          <Badge
+            variant="primary"
+            pill
+            className={`${styles.Tags}`}
+            onClick={() => setTags("Leadership")}
           >
             Leadership
-            </Badge>
-      </Container>
+          </Badge>
+        </Container>
       </Col>
     </Row>
   );

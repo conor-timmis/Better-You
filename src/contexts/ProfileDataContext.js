@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react"; // Import React
 import { axiosReq, axiosRes } from "../api/axiosDefaults";
 import { useCurrentUser } from "../contexts/CurrentUserContext";
 import { followHelper, unfollowHelper } from "../utils/utils";
@@ -11,7 +11,6 @@ export const useSetProfileData = () => useContext(SetProfileDataContext);
 
 export const ProfileDataProvider = ({ children }) => {
   const [profileData, setProfileData] = useState({
-    // we will use the pageProfile later!
     pageProfile: { results: [] },
     popularProfiles: { results: [] },
   });
@@ -46,6 +45,7 @@ export const ProfileDataProvider = ({ children }) => {
         },
       }));
     } catch (err) {
+      console.error("Follow request failed:", err);
     }
   };
 
@@ -53,7 +53,7 @@ export const ProfileDataProvider = ({ children }) => {
     Makes a request to the /followers/ endpoint
     Sends id information about profile
     Deletes following id and reflects to 
-    most followed and profilepage
+    most followed and profile page
   */
   const handleUnfollow = async (clickedProfile) => {
     try {
@@ -74,6 +74,7 @@ export const ProfileDataProvider = ({ children }) => {
         },
       }));
     } catch (err) {
+      console.error("Unfollow request failed:", err);
     }
   };
 
@@ -92,6 +93,7 @@ export const ProfileDataProvider = ({ children }) => {
           popularProfiles: data,
         }));
       } catch (err) {
+        console.error("Fetch popular profiles failed:", err);
       }
     };
 

@@ -49,6 +49,7 @@ function CommentCreateForm(props) {
       setContent("");
       setRating(0);
     } catch (err) {
+      console.error("Error creating comment:", err);
     }
   };
 

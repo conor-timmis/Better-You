@@ -32,6 +32,7 @@ const NavBar = () => {
       setCurrentUser(null);
       removeTokenTimestamp();
     } catch (err) {
+      console.error("Logout failed:", err);
     }
   };
 
@@ -48,6 +49,7 @@ const NavBar = () => {
       <i className="far fa-plus-square"></i>Add post
     </NavLink>
   );
+
   /*
     loggedInIcons variable to display icons if a user is
     authenticated / logged in, displays username and 
@@ -81,6 +83,7 @@ const NavBar = () => {
       </NavLink>
     </>
   );
+
   /*
     loggedOutIcons variable to display icons if a user is
     unauthenticated / logged out, icons display in navbar

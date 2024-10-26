@@ -15,6 +15,7 @@ const ThreeDots = React.forwardRef(({ onClick }, ref) => (
   />
 ));
 
+ThreeDots.displayName = "ThreeDots";
 
 /*
   Dropdown menu for post owners to choose to edit or delete a post
@@ -47,7 +48,6 @@ export const MoreDropdown = ({ handleEdit, handleDelete }) => {
     </Dropdown>
   );
 };
-
 
 /*
   Dropdown menu within profile page,
