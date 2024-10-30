@@ -1,0 +1,15 @@
+.formContainer {
+    margin-top: 50px;
+  }
+  
+  .inputField {
+    margin-bottom: 1rem;
+  }
+  
+  .textareaField {
+    resize: none;
+  }
+  
+  .textareaNonResizable {
+    height: auto;
+  }
