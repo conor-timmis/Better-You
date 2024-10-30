@@ -198,6 +198,7 @@ Neither: Accessible without being logged in.
 | Profile                              | No                 | Yes               | No               |
 | Post Create                          | No                 | Yes               | Yes              |
 | Post Edit                            | No                 | Yes               | Yes              |
+| Contact                              | Yes                | Yes               | N/A              |
 
 Admins can access the Django admin panel for the backend API.
 
@@ -270,6 +271,10 @@ Profile Edit View:
 #### Sign Up
 
 ![Sign Up](documentation/wireframes/signup.png)
+
+#### Home Page
+
+![Home Page](documentation/wireframes/contact.png)
 
 
 ### Colour Scheme
