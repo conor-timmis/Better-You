@@ -1,9 +1,10 @@
 import axios from "axios";
 import { useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 
 export const useRedirect = (userAuthStatus) => {
   const history = useHistory();
+  const location = useLocation();
 
   /*
     Checks if the user is currently logged in or not
@@ -23,11 +24,13 @@ export const useRedirect = (userAuthStatus) => {
       } catch (err) {
         // if user is not logged in, the code below will run
         if (userAuthStatus === "loggedOut") {
-          history.push("/");
+          if (location.pathname !== '/contact/create') {
+            history.push("/");
+          }
         }
       }
     };
 
     handleMount();
-  }, [history, userAuthStatus]);
+  }, [history, userAuthStatus, location]);
 };
