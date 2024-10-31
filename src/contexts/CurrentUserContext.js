@@ -13,8 +13,6 @@ export const useSetCurrentUser = () => useContext(SetCurrentUserContext);
 /**
  * CurrentUserProvider component that fetches the current user data
  * and manages user authentication tokens.
- *
- * @param {React.PropsWithChildren} children - The child components that will be wrapped.
  */
 export const CurrentUserProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);

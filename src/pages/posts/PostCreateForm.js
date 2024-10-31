@@ -136,6 +136,7 @@ function PostCreateForm() {
           name="content"
           value={content}
           onChange={handleChange}
+          className={`${formStyles.Form} ${formStyles.noResize}`}
         />
       </Form.Group>
       {errors?.content?.map((message, idx) => (

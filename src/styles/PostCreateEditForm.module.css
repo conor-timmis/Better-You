@@ -21,6 +21,10 @@
   animation: alert-animation 0.5s ease-in-out forwards;
 }
 
+.noResize {
+  resize: none;
+}
+
 @keyframes alert-animation {
   0% {
     transform: translateX(-200%);
