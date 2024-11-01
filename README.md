@@ -569,6 +569,7 @@ Sprint Four focused on refining existing features and adding additional function
 -   The "upload-img" Upload Image I found over at [Flaticon](https://www.flaticon.com/free-icon/upload_8045653)
 -   The Sign In and Sign Up form images were found over at [Unsplash](https://plus.unsplash.com/premium_photo-1672115680958-54438df0ab82?q=80&w=1768&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdl) & [Unsplash](https://images.unsplash.com/photo-1600298882283-40b4dcb8b211?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D) for more atmosphere on these pages.
 - I used [ESLint](https://eslint.org/) for code validation via the command line.
+- I made use of the "Moments" module as a base for my project from Code Institute's lessons to give me a good idea and direction to begin with, and has came very handy in the development with the little amount of time I had to create my project.
 
 
 I also used the documentation of all the elements included in this project:
