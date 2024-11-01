@@ -15,6 +15,10 @@ import { useSetCurrentUser } from "../../contexts/CurrentUserContext";
 import { useRedirect } from "../../hooks/useRedirect";
 import { setTokenTimestamp } from "../../utils/utils";
 
+/**
+ * SignInForm component renders the sign-in form, handles form submission,
+ * and manages form state for username and password input.
+ */
 function SignInForm() {
   const setCurrentUser = useSetCurrentUser();
   useRedirect("loggedIn");
@@ -28,6 +32,11 @@ function SignInForm() {
   const [errors, setErrors] = useState({});
 
   const history = useHistory();
+  /**
+   * Submits the form data to the login endpoint,
+   * sets the current user, and updates token timestamp.
+   * Navigates to the previous page upon successful sign-in.
+   */
   const handleSubmit = async (event) => {
     event.preventDefault();
 
