@@ -475,7 +475,66 @@ Several front end libraries were utilised during this project. Below I set out w
 
 ### Deployment
 
-This project was deployed to the [Heroku](https://id.heroku.com/login) Web Application hosting platform.
+The live deployed application can be found deployed on [Heroku](https://better-you-fr-3267b0b1af2f.herokuapp.com/).
+
+
+### Heroku Deployment
+
+This project uses [Heroku](https://www.heroku.com), a platform as a service (PaaS) that enables developers to build, run, and operate applications entirely in the cloud.
+
+To deploy this React app on Heroku, follow these steps:
+
+1. **Install Heroku CLI (Optional)**
+    If you'd like to deploy directly from the command line, you can install the Heroku CLI on your local machine. Otherwise, you can deploy using a GitHub repository or another similar method.
+
+2. **Prepare the Application**  
+   - Ensure the application is production-ready by running:
+     ```bash
+     npm run build
+     ```
+     This generates an optimized production build in the `build/` directory.
+
+3. **Deployment Files**  
+   Ensure the following files are present in the repository for Heroku deployment:
+   - `Procfile`  
+     Contains:
+     ```
+     web: serve -s build
+     ```
+   - `package.json`  
+     Includes the `heroku-postbuild` script to build the React app:
+     ```json
+     "scripts": {
+       "start": "node server.js",
+       "build": "react-scripts build",
+       "heroku-postbuild": "npm run build"
+     }
+     ```
+
+4. **Deploy to Heroku**  
+   - Push the code to a new Heroku app by following these steps:
+     1. Log in to Heroku:
+        ```bash
+        heroku login
+        ```
+     2. Create a new Heroku app:
+        ```bash
+        heroku create your-app-name
+        ```
+     3. Push the code:
+        ```bash
+        git push heroku main
+        ```
+
+    Alternatively, you can connect your GitHub repository to Heroku through the Heroku dashboard and deploy manually/automatically.
+
+5. **Axios Variable**  
+   For the Better You project, I have used Axios to facilitate communication between the Frontend and Backend. In the AxiosDefaults file, you will need to update the destination URL to point to your own deployed backend. This will ensure proper communication between your repositories..
+
+> [!CAUTION]  
+> Ensure any sensitive keys or API secrets are stored securely in environment variables.
+
+By following these steps, the project can be successfully deployed and run in any Heroku environment.
 
 
 ## 8. Agile Methodology
